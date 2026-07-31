@@ -1,0 +1,21 @@
+# Prompt do Rayfin / Fabric Apps
+
+Zbuduj aplikację Microsoft Fabric App o nazwie **„Siatka Bezpieczeństwa – Pulpit Koordynacji”**. Interfejs ma być po polsku, ale nazwy techniczne pól, tabel i akcji pozostają po angielsku bez polskich znaków. Aplikacja jest demonstracją dla krajowej perspektywy RCB/RZZK/ministerstw i pokazuje, jak siatka bezpieczeństwa KPZK przestaje być statycznym PDF/Excel, a staje się operacyjną aplikacją z planem zadań, deklaracjami gotowości, wykrywaniem blokad i eskalacją do RZZK.
+
+Kontekst domenowy: zagrożenia KPZK Z01–Z20, działy administracji I–XXV, fazy `R` reagowanie i `O` odbudowa, moduły zadaniowe 1–7, Standardowe Procedury Operacyjne SPO-1–SPO-16. Scenariusz domyślny to `POWODZ_WRZESIEN_2026`, `Z02 Powódź`, faza `R`, skala `4`. Dla tego scenariusza plan ma 44 zadań, analiza luk ma 9 blokad i 28 zadań po SLA.
+
+Źródła danych w Lakehouse: `dim_hazard(hazard_code,hazard_name,category,probability,impact,risk_score,risk_level,color)`, `dim_admin_division(admin_division,admin_name,ministry,subordinate_institutions)`, `dim_task_module(task_module_id,task_module_name,description)`, `fact_safety_grid(hazard_code,admin_division,phase,task_modules,role,criticality)`, `dim_spo(spo_code,spo_name,related_hazards)`, `fact_spo_checklist(spo_code,step_number,step_description,responsible_admin_division,sla_hours,required_document)`, `dim_contact_point(admin_division,role,unit,duty_phone,email,deputy)`, `fact_readiness_declaration(timestamp,event_id,admin_division,task_module_id,status,comment,forces_and_assets)`, `fact_task_activation(timestamp,event_id,day_offset,hazard_code,phase,task_module_id,leading_admin_division,activation_status,trigger)`, `fact_interdependency(task_module_id,depends_on_task_module_id,dependency_reason)`, `activation_plan`, `gap_analysis_summary`, `gap_analysis_overdue`, `responsibility_graph`.
+
+Utwórz role: `RCB coordinator`, `Ministry duty officer`, `RZZK viewer`, `Admin`. Zastosuj RLS: `Ministry duty officer` widzi i zapisuje tylko swój `admin_division`; `RCB coordinator` widzi całość; `RZZK viewer` ma tylko odczyt; `Admin` ma konfigurację.
+
+Ekran 1 **Wybór zagrożenia**: kafelki 20 zagrożeń, kolor wg `dim_hazard[color]`, etykieta `risk_score`, filtr `category`, wybór `phase`, `event_scale`, `event_id`. Domyślnie wybierz `Z02 Powódź`, `R`, `4`, `POWODZ_WRZESIEN_2026`. Przycisk `Generate activation plan` uruchamia pipeline/notebook i po sukcesie przechodzi do listy zadań.
+
+Ekran 2 **Lista zadań**: tabela `activation_plan` z kolumnami: dział, ministerstwo, moduł, rola, krytyczność, SLA, kolejność zależności, status gotowości. Dodaj slicery: `role`, `status`, `criticality`, `task_module_id`, `admin_division`. Dodaj wyszukiwarkę tekstową i akcję przejścia do karty działu. Pokaż KPI: liczba zadań, liczba zadań wiodących, liczba blokad, liczba po SLA.
+
+Ekran 3 **Karta działu administracji**: dla zalogowanego dyżurnego pokaż jego zadania, dane kontaktowe, instytucje podległe i formularz deklaracji. Przyciski: `Potwierdź gotowość`, `Zgłoś blokadę`, `Zapisz w toku`. Walidacje: komentarz wymagany dla `zablokowane`, `forces_and_assets` wymagane dla `gotowe`, `task_module_id` musi być 1–7. Zapis do `fact_readiness_declaration_writeback` z polami: writeback_id, timestamp, event_id, admin_division, task_module_id, status, comment, forces_and_assets, source_user.
+
+Ekran 4 **Pulpit koordynatora RCB**: KPI: % gotowości, blokady, zadania po SLA, przeciążone działy, ścieżka krytyczna. Tabela blokad z komentarzem i działem. Wykres obciążenia działów wiodących. Przycisk `Eskaluj do RZZK` tworzy `escalation_request` z rekomendacją `SPO-1` i generuje powiadomienie.
+
+Ekran 5 **Kontakty i SPO-1**: książka kontaktów z `dim_contact_point`, karta procedury `SPO-1`, checklisty z `fact_spo_checklist`, przycisk `Generate participant list`. Lista uczestników ma pochodzić z aktywnego planu: działy wiodące i współpracujące plus RCB. Dodaj eksport CSV i wiadomość Teams.
+
+UX: styl instytucjonalny, jasne tło, granatowy nagłówek, kolory ryzyka KPZK, duże KPI, mało ozdobników. Każda akcja zapisu ma mieć potwierdzenie i widoczny timestamp. Każdy ekran ma breadcrumb: `Zdarzenie > Zagrożenie > Faza > Ekran`. Komunikaty błędów mają być zrozumiałe dla użytkownika nietechnicznego.

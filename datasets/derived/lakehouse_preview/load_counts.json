@@ -1,0 +1,12 @@
+{
+  "dim_admin_division.csv": 25,
+  "dim_contact_point.csv": 25,
+  "dim_hazard.csv": 20,
+  "dim_spo.csv": 16,
+  "dim_task_module.csv": 7,
+  "fact_interdependency.csv": 7,
+  "fact_safety_grid.csv": 1000,
+  "fact_spo_checklist.csv": 64,
+  "fact_readiness_declaration.jsonl": 106,
+  "fact_task_activation.jsonl": 79
+}

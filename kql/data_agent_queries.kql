@@ -1,0 +1,71 @@
+// data_agent_queries.kql
+// Wzorce zapytań dla Data Agent. Każde zapytanie odpowiada na naturalne pytanie
+// decydenta i ma komentarz z oczekiwanym wynikiem.
+
+// 1. Pytanie: „Kto odpowiada za łączność przy powodzi w fazie odbudowy?”
+// Oczekiwany wynik: działy z Z02/O, które mają moduł 4, wraz z rolą i ministerstwem.
+fact_safety_grid
+| where hazard_code == "Z02" and phase == "O" and task_modules has "4"
+| join kind=leftouter dim_admin_division on admin_division
+| project admin_division, admin_name, ministry, role, criticality, task_modules
+| order by role asc
+
+// 2. Pytanie: „Kto jest wiodący przy powodzi w reagowaniu?”
+// Oczekiwany wynik: VIII Gospodarka wodna i XIX Sprawy wewnętrzne.
+fact_safety_grid
+| where hazard_code == "Z02" and phase == "R" and role == "wiodący"
+| join kind=leftouter dim_admin_division on admin_division
+| project admin_division, admin_name, ministry, task_modules, criticality
+
+// 3. Pytanie: „Które działy są przeciążone?”
+// Oczekiwany wynik: działy z co najmniej 4 zadaniami wiodącymi; w demo VIII i XIX po 5.
+activation_plan
+| where role == "wiodący"
+| summarize lead_count=count() by admin_division, ministry
+| where lead_count >= 4
+| order by lead_count desc
+
+// 4. Pytanie: „Jakie kroki ma SPO-1?”
+// Oczekiwany wynik: cztery kroki checklisty z SLA i wymaganym dokumentem.
+fact_spo_checklist
+| where spo_code == "SPO-1"
+| join kind=leftouter dim_admin_division on $left.responsible_admin_division == $right.admin_division
+| project step_number, step_description, responsible_admin_division, admin_name, sla_hours, required_document
+| order by step_number asc
+
+// 5. Pytanie: „Co blokuje ścieżkę krytyczną?”
+// Oczekiwany wynik: blokady dla modułów 1,2,3,4, jeśli istnieją, z komentarzem dyżurnego.
+fact_readiness_declaration
+| where event_id == "POWODZ_WRZESIEN_2026" and status == "zablokowane" and task_module_id in (1,2,3,4)
+| project timestamp, admin_division, task_module_id, status, comment, forces_and_assets
+| order by timestamp desc
+
+// 6. Pytanie: „Ile zadań ma plan Z02/R/4 i jakie moduły obejmuje?”
+// Oczekiwany wynik: 44 zadania i moduły 1,2,4,5,7.
+activation_plan
+| summarize tasks=count(), modules=make_set(task_module_id), divisions=dcount(admin_division) by hazard_code, phase, scale
+
+// 7. Pytanie: „Jakie są kontakty dla działu XIII?”
+// Oczekiwany wynik: jeden syntetyczny punkt kontaktowy dla Łączności.
+dim_contact_point
+| where admin_division == "XIII"
+| project admin_division, role, unit, duty_phone, email, deputy
+
+// 8. Pytanie: „Jakie moduły zależą od monitorowania?”
+// Oczekiwany wynik: moduły, które mają depends_on_task_module_id=1.
+fact_interdependency
+| where depends_on_task_module_id == 1
+| join kind=leftouter dim_task_module on task_module_id
+| project task_module_id, task_module_name, dependency_reason
+| order by task_module_id asc
+
+// 9. Pytanie: „Jaki jest poziom ryzyka powodzi?”
+// Oczekiwany wynik: rekord Z02 z probability, impact, risk_score i color.
+dim_hazard
+| where hazard_code == "Z02"
+| project hazard_code, hazard_name, category, probability, probability_label, impact, impact_label, risk_score, risk_level, color
+
+// 10. Pytanie: „Czy rekomendujesz eskalację do RZZK?”
+// Oczekiwany wynik: summary z blokadami i zadaniami po SLA; jeśli wartości dodatnie, kandydat do SPO-1.
+gap_analysis_summary
+| project plan_tasks, not_ready_tasks, overdue_tasks, blocked_tasks, overloaded_leading_divisions, critical_path_modules, recommendation=iif(blocked_tasks > 0 or overdue_tasks >= 5, "kandydat do eskalacji RZZK / SPO-1", "monitorować")

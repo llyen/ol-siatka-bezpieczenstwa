@@ -1,0 +1,21 @@
+hazard_code,hazard_name,category,probability,probability_label,impact,impact_label,risk_score,risk_level,color
+Z01,Epidemia,społeczne,3,możliwe,5,katastrofalne,15,wysokie,czerwony
+Z02,Powódź,naturalne,4,prawdopodobne,4,duże,16,wysokie,czerwony
+Z03,Zakłócenie funkcjonowania systemów i sieci teleinformatycznych,techniczne,3,możliwe,4,duże,12,podwyższone,żółty
+Z04,Działania hybrydowe,hybrydowe,3,możliwe,4,duże,12,podwyższone,żółty
+Z05,Susza/upał,naturalne,4,prawdopodobne,3,średnie,12,podwyższone,żółty
+Z06,Epizootia,naturalne,4,prawdopodobne,3,średnie,12,podwyższone,żółty
+Z07,Zakłócenie w systemie energetycznym,techniczne,4,prawdopodobne,3,średnie,12,podwyższone,żółty
+Z08,Silny wiatr,naturalne,4,prawdopodobne,3,średnie,12,podwyższone,żółty
+Z09,Zakłócenie w systemie paliwowym,techniczne,3,możliwe,3,średnie,9,podwyższone,żółty
+Z10,Pożar wielkopowierzchniowy,naturalne,3,możliwe,3,średnie,9,podwyższone,żółty
+Z11,Epifitoza,naturalne,3,możliwe,3,średnie,9,podwyższone,żółty
+Z12,Zakłócenie funkcjonowania systemów i usług telekomunikacyjnych,techniczne,3,możliwe,3,średnie,9,podwyższone,żółty
+Z13,Skażenie chemiczne na lądzie,techniczne,2,rzadkie,2,małe,4,niskie,zielony
+Z14,Zakłócenie w systemie gazowym,techniczne,2,rzadkie,3,średnie,6,niskie,zielony
+Z15,Katastrofa morska,techniczne,2,rzadkie,3,średnie,6,niskie,zielony
+Z16,Zdarzenie o charakterze terrorystycznym,społeczne,1,bardzo rzadkie,4,duże,4,niskie,zielony
+Z17,Skażenie promieniotwórcze,techniczne,1,bardzo rzadkie,4,duże,4,niskie,zielony
+Z18,Zbiorowe zakłócenie porządku publicznego,społeczne,4,prawdopodobne,2,małe,8,podwyższone,żółty
+Z19,Silny mróz/intensywne opady śniegu,naturalne,3,możliwe,2,małe,6,niskie,zielony
+Z20,Dezinformacja,hybrydowe,3,możliwe,3,średnie,9,podwyższone,żółty

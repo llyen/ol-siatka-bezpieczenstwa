@@ -1,0 +1,63 @@
+// activator_rules.kql
+// Reguły bazowe dla Data Activator. Każda reguła ma opis, źródło, oczekiwany wynik
+// i przykładowe zapytanie KQL/pseudokod.
+
+// 1. SLA exceeded.
+// Liczy: zadania niegotowe po SLA. Zasila: alert do dyżurnego działu i RCB.
+// Oczekiwany wynik: 28 rekordów w danych demo.
+gap_analysis_overdue
+| where hours_over_sla > 0 and status != "gotowe"
+| project admin_division, task_module_id, task_module_name, status, deadline, hours_over_sla
+| order by hours_over_sla desc
+
+// 2. Missing readiness declaration.
+// Liczy: zadania z planu bez żadnej deklaracji gotowości. Zasila: przypomnienie po 6 h.
+// Oczekiwany wynik: zależy od scalania write-back; w danych bazowych może być 0 lub lista braków.
+activation_plan
+| join kind=leftanti fact_readiness_declaration on admin_division, task_module_id
+| project hazard_code, phase, admin_division, task_module_id, task_module_name, sla_hours
+
+// 3. Critical path blocker.
+// Liczy: blokady na modułach 1,2,3,4. Zasila: natychmiastowy alert RCB i kandydat RZZK.
+// Oczekiwany wynik: blokady, jeśli komentarze dotyczą łączności/transportu/energii.
+fact_readiness_declaration
+| where status == "zablokowane" and task_module_id in (1,2,3,4)
+| project timestamp, event_id, admin_division, task_module_id, comment, forces_and_assets
+| order by timestamp desc
+
+// 4. Division overload.
+// Liczy: działy wiodące w co najmniej 4 zadaniach. Zasila: alert o przeciążeniu.
+// Oczekiwany wynik: VIII i XIX mają po 5 zadań wiodących w planie Z02/R/4.
+activation_plan
+| where role == "wiodący"
+| summarize lead_count=count(), modules=make_set(task_module_id) by admin_division, ministry
+| where lead_count >= 4
+| order by lead_count desc
+
+// 5. Disinformation coupling.
+// Liczy: współwystąpienie Z02 i Z20 w jednym event_id. Zasila: alert modułu 7 i SPO-3/SPO-16.
+// Oczekiwany wynik: w danych bazowych aktywne jest Z02; reguła gotowa na dodanie Z20.
+fact_task_activation
+| where hazard_code in ("Z02", "Z20")
+| summarize hazards=make_set(hazard_code) by event_id
+| where set_has_element(hazards, "Z02") and set_has_element(hazards, "Z20")
+
+// 6. RZZK escalation candidate.
+// Liczy: czy zdarzenie spełnia warunki eskalacji. Zasila: przycisk i powiadomienie „Eskaluj do RZZK”.
+// Oczekiwany wynik: kandydat, bo demo ma 9 blokad i 28 zadań po SLA.
+gap_analysis_summary
+| extend escalation_candidate = blocked_tasks >= 1 or overdue_tasks >= 5 or array_length(parse_json(tostring(overloaded_leading_divisions))) > 0
+| project plan_tasks, not_ready_tasks, overdue_tasks, blocked_tasks, overloaded_leading_divisions, escalation_candidate
+
+// 7. No activation progress after D0.
+// Liczy: moduły bez aktywacji po D0. Zasila: alert techniczno-operacyjny.
+// Oczekiwany wynik: zwykle brak, bo generator tworzy aktywacje wszystkich modułów po D0.
+range module_id from 1 to 7 step 1
+| join kind=leftanti (fact_task_activation | where day_offset >= 0 | distinct task_module_id) on $left.module_id == $right.task_module_id
+
+// 8. Contact missing for active division.
+// Liczy: aktywne działy bez punktu kontaktowego. Zasila: alert administracyjny przed SPO-1.
+// Oczekiwany wynik: brak, bo dim_contact_point ma 25 rekordów.
+activation_plan
+| summarize by admin_division
+| join kind=leftanti dim_contact_point on admin_division

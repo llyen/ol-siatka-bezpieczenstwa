@@ -1,0 +1,26 @@
+admin_division,admin_name,ministry,subordinate_institutions
+I,Administracja publiczna,Minister Spraw Wewnętrznych i Administracji,RCB; wojewodowie; administracja zespolona
+II,"Budownictwo, planowanie przestrzenne i mieszkalnictwo",Minister Rozwoju i Technologii,GUNB; instytuty budownictwa; nadzór budowlany
+III,Budżet,Minister Finansów,Departament Budżetu Państwa; dysponenci części budżetowych
+IV,Energia,Minister Klimatu i Środowiska,operatorzy systemów energetycznych; URE
+V,Finanse publiczne,Minister Finansów,KAS; BGK; jednostki finansów publicznych
+VI,Gospodarka,Minister Rozwoju i Technologii,PARP; UOKiK; wsparcie przedsiębiorstw
+VII,Gospodarka morska,Minister Infrastruktury,urzędy morskie; SAR; porty
+VIII,Gospodarka wodna,Minister Infrastruktury,Wody Polskie; IMGW-PIB; RZGW
+IX,Zdrowie,Minister Zdrowia,NFZ; GIS; szpitale; Lotnicze Pogotowie Ratunkowe
+X,Informatyzacja,Minister Cyfryzacji,CSIRT GOV; COI; NASK
+XI,Kultura i ochrona dziedzictwa narodowego,Minister Kultury i Dziedzictwa Narodowego,NID; archiwa państwowe; instytucje kultury
+XII,Kultura fizyczna,Minister Sportu i Turystyki,COS; obiekty sportowe jako miejsca wsparcia
+XIII,Łączność,Minister Cyfryzacji,UKE; operatorzy telekomunikacyjni; łączność kryzysowa
+XIV,Obrona narodowa,Minister Obrony Narodowej,SZ RP; WOT; Żandarmeria Wojskowa
+XV,Oświata i wychowanie,Minister Edukacji Narodowej,kuratoria; szkoły; placówki oświatowe
+XVI,Praca,"Minister Rodziny, Pracy i Polityki Społecznej",PIP; urzędy pracy
+XVII,Rolnictwo,Minister Rolnictwa i Rozwoju Wsi,GIW; PIORiN; KOWR; ARiMR
+XVIII,Sprawiedliwość,Minister Sprawiedliwości,prokuratura; sądy; Służba Więzienna
+XIX,Sprawy wewnętrzne,Minister Spraw Wewnętrznych i Administracji,Policja; PSP; Straż Graniczna; SOP
+XX,Sprawy zagraniczne,Minister Spraw Zagranicznych,placówki dyplomatyczne; centrum operacyjne MSZ
+XXI,Środowisko,Minister Klimatu i Środowiska,GIOŚ; parki narodowe; inspekcja ochrony środowiska
+XXII,Transport,Minister Infrastruktury,GDDKiA; PKP PLK; UTK; GITD
+XXIII,Zabezpieczenie społeczne,"Minister Rodziny, Pracy i Polityki Społecznej",ZUS; OPS; centra usług społecznych
+XXIV,Klimat,Minister Klimatu i Środowiska,IMGW-PIB; instytuty klimatu; system adaptacji
+XXV,Aktywa państwowe,Minister Aktywów Państwowych,spółki strategiczne; rezerwy infrastrukturalne

@@ -1,0 +1,4 @@
+# Runtime scripts use Python standard library only.
+# Optional for notebook 04_graph_view.py rich graph analytics:
+networkx>=3.2
+pandas>=2.0

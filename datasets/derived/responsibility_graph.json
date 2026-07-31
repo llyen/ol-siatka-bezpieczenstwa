@@ -1,0 +1,274 @@
+{
+  "nodes": [
+    {
+      "id": "hazard:Z02",
+      "label": "Z02 Powódź",
+      "type": "hazard",
+      "centrality": 1.0
+    },
+    {
+      "id": "division:IV",
+      "label": "Energia",
+      "type": "division",
+      "centrality": 0.09090909090909091
+    },
+    {
+      "id": "division:VIII",
+      "label": "Gospodarka wodna",
+      "type": "division",
+      "centrality": 0.09090909090909091
+    },
+    {
+      "id": "division:IX",
+      "label": "Zdrowie",
+      "type": "division",
+      "centrality": 0.09090909090909091
+    },
+    {
+      "id": "division:XIII",
+      "label": "Łączność",
+      "type": "division",
+      "centrality": 0.09090909090909091
+    },
+    {
+      "id": "division:XIV",
+      "label": "Obrona narodowa",
+      "type": "division",
+      "centrality": 0.09090909090909091
+    },
+    {
+      "id": "division:XIX",
+      "label": "Sprawy wewnętrzne",
+      "type": "division",
+      "centrality": 0.09090909090909091
+    },
+    {
+      "id": "division:XXI",
+      "label": "Środowisko",
+      "type": "division",
+      "centrality": 0.09090909090909091
+    },
+    {
+      "id": "division:XXII",
+      "label": "Transport",
+      "type": "division",
+      "centrality": 0.09090909090909091
+    },
+    {
+      "id": "division:XXIII",
+      "label": "Zabezpieczenie społeczne",
+      "type": "division",
+      "centrality": 0.09090909090909091
+    },
+    {
+      "id": "division:XXIV",
+      "label": "Klimat",
+      "type": "division",
+      "centrality": 0.09090909090909091
+    },
+    {
+      "id": "division:II",
+      "label": "Budownictwo, planowanie przestrzenne i mieszkalnictwo",
+      "type": "division",
+      "centrality": 0.09090909090909091
+    }
+  ],
+  "edges": [
+    {
+      "source": "hazard:Z02",
+      "target": "division:IV",
+      "role": "współpracujący",
+      "phase": "R",
+      "modules": "1;2;4;7"
+    },
+    {
+      "source": "hazard:Z02",
+      "target": "division:VIII",
+      "role": "wiodący",
+      "phase": "R",
+      "modules": "1;2;4;5;7"
+    },
+    {
+      "source": "hazard:Z02",
+      "target": "division:IX",
+      "role": "współpracujący",
+      "phase": "R",
+      "modules": "1;2;4;7"
+    },
+    {
+      "source": "hazard:Z02",
+      "target": "division:XIII",
+      "role": "współpracujący",
+      "phase": "R",
+      "modules": "1;2;4;7"
+    },
+    {
+      "source": "hazard:Z02",
+      "target": "division:XIV",
+      "role": "współpracujący",
+      "phase": "R",
+      "modules": "1;2;4;5;7"
+    },
+    {
+      "source": "hazard:Z02",
+      "target": "division:XIX",
+      "role": "wiodący",
+      "phase": "R",
+      "modules": "1;2;4;5;7"
+    },
+    {
+      "source": "hazard:Z02",
+      "target": "division:XXI",
+      "role": "współpracujący",
+      "phase": "R",
+      "modules": "1;2;4;7"
+    },
+    {
+      "source": "hazard:Z02",
+      "target": "division:XXII",
+      "role": "współpracujący",
+      "phase": "R",
+      "modules": "1;2;4;5;7"
+    },
+    {
+      "source": "hazard:Z02",
+      "target": "division:XXIII",
+      "role": "współpracujący",
+      "phase": "R",
+      "modules": "1;2;4;7"
+    },
+    {
+      "source": "hazard:Z02",
+      "target": "division:XXIV",
+      "role": "współpracujący",
+      "phase": "R",
+      "modules": "1;2;4;7"
+    },
+    {
+      "source": "hazard:Z02",
+      "target": "division:II",
+      "role": "wiodący",
+      "phase": "O",
+      "modules": "2;3;4;6;7"
+    },
+    {
+      "source": "hazard:Z02",
+      "target": "division:IV",
+      "role": "współpracujący",
+      "phase": "O",
+      "modules": "2;3;4;6;7"
+    },
+    {
+      "source": "hazard:Z02",
+      "target": "division:VIII",
+      "role": "wiodący",
+      "phase": "O",
+      "modules": "2;3;4;6;7"
+    },
+    {
+      "source": "hazard:Z02",
+      "target": "division:IX",
+      "role": "współpracujący",
+      "phase": "O",
+      "modules": "2;3;4;6;7"
+    },
+    {
+      "source": "hazard:Z02",
+      "target": "division:XIII",
+      "role": "współpracujący",
+      "phase": "O",
+      "modules": "2;3;4;6;7"
+    },
+    {
+      "source": "hazard:Z02",
+      "target": "division:XIX",
+      "role": "współpracujący",
+      "phase": "O",
+      "modules": "2;3;4;6;7"
+    },
+    {
+      "source": "hazard:Z02",
+      "target": "division:XXI",
+      "role": "współpracujący",
+      "phase": "O",
+      "modules": "2;3;4;6;7"
+    },
+    {
+      "source": "hazard:Z02",
+      "target": "division:XXII",
+      "role": "wiodący",
+      "phase": "O",
+      "modules": "2;3;4;6;7"
+    },
+    {
+      "source": "hazard:Z02",
+      "target": "division:XXIII",
+      "role": "współpracujący",
+      "phase": "O",
+      "modules": "2;3;4;6;7"
+    },
+    {
+      "source": "hazard:Z02",
+      "target": "division:XXIV",
+      "role": "współpracujący",
+      "phase": "O",
+      "modules": "2;3;4;6;7"
+    }
+  ],
+  "single_points_of_failure": [
+    {
+      "node": "division:IV",
+      "label": "Energia",
+      "degree": 2,
+      "centrality": 0.09090909090909091
+    },
+    {
+      "node": "division:VIII",
+      "label": "Gospodarka wodna",
+      "degree": 2,
+      "centrality": 0.09090909090909091
+    },
+    {
+      "node": "division:IX",
+      "label": "Zdrowie",
+      "degree": 2,
+      "centrality": 0.09090909090909091
+    },
+    {
+      "node": "division:XIII",
+      "label": "Łączność",
+      "degree": 2,
+      "centrality": 0.09090909090909091
+    },
+    {
+      "node": "division:XIX",
+      "label": "Sprawy wewnętrzne",
+      "degree": 2,
+      "centrality": 0.09090909090909091
+    },
+    {
+      "node": "division:XXI",
+      "label": "Środowisko",
+      "degree": 2,
+      "centrality": 0.09090909090909091
+    },
+    {
+      "node": "division:XXII",
+      "label": "Transport",
+      "degree": 2,
+      "centrality": 0.09090909090909091
+    },
+    {
+      "node": "division:XXIII",
+      "label": "Zabezpieczenie społeczne",
+      "degree": 2,
+      "centrality": 0.09090909090909091
+    },
+    {
+      "node": "division:XXIV",
+      "label": "Klimat",
+      "degree": 2,
+      "centrality": 0.09090909090909091
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "hazard_code": "Z02",
+  "phase": "R",
+  "scale": 4,
+  "tasks": 44,
+  "modules": [
+    1,
+    2,
+    4,
+    5,
+    7
+  ],
+  "dependency_order": {
+    "1": 1,
+    "2": 2,
+    "4": 3,
+    "5": 4,
+    "7": 5
+  }
+}

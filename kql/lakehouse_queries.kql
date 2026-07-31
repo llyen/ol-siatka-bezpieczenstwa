@@ -1,0 +1,65 @@
+// lakehouse_queries.kql
+// Zapytania bazowe do walidacji Lakehouse/Eventhouse. Każde zapytanie ma komentarz z celem,
+// miejscem użycia i oczekiwanym wynikiem na danych wygenerowanych seed=42.
+
+// 1. Liczność tabel referencyjnych.
+// Zasila: kontrolkę techniczną w SETUP_FABRIC i stronę administracyjną raportu.
+// Oczekiwany wynik: 20 zagrożeń, 25 działów, 7 modułów, 16 SPO.
+dim_hazard | summarize rows=count() | extend table_name="dim_hazard"
+| union (dim_admin_division | summarize rows=count() | extend table_name="dim_admin_division")
+| union (dim_task_module | summarize rows=count() | extend table_name="dim_task_module")
+| union (dim_spo | summarize rows=count() | extend table_name="dim_spo")
+| project table_name, rows
+
+// 2. Kontrola kompletności kanonicznej siatki.
+// Zasila: test „czy działa” po ładowaniu Lakehouse.
+// Oczekiwany wynik: 1000 komórek = 20 hazards × 25 divisions × 2 phases.
+fact_safety_grid
+| summarize grid_cells=count(), hazards=dcount(hazard_code), divisions=dcount(admin_division), phases=dcount(phase)
+| extend expected_cells = hazards * divisions * phases
+
+// 3. Rozkład ról w siatce bezpieczeństwa.
+// Zasila: opis modelu i kontrolę realizmu przypisań.
+// Oczekiwany wynik: wiodący jest mniejszością, współpracujący średnią warstwą, wspierający dopełnia macierz.
+fact_safety_grid
+| summarize cells=count() by role
+| order by cells desc
+
+// 4. Status gotowości według działu.
+// Zasila: ekran RCB, stronę „Analiza luk” i pytania Data Agenta o gotowość.
+// Oczekiwany wynik: działy z mieszanką statusów, w tym „zablokowane”.
+fact_readiness_declaration
+| summarize ready=countif(status == "gotowe"), blocked=countif(status == "zablokowane"), total=count() by admin_division
+| extend readiness_pct = round(100.0 * todouble(ready) / todouble(total), 1)
+| order by readiness_pct asc
+
+// 5. Kandydaci do SPO-1 z aktywnego planu.
+// Zasila: ekran 5 aplikacji, generowanie listy uczestników posiedzenia RZZK.
+// Oczekiwany wynik: działy wiodące i współpracujące dla Z02/R/4.
+activation_plan
+| where role in ("wiodący", "współpracujący")
+| summarize modules=make_set(task_module_id), roles=make_set(role), tasks=count() by admin_division, ministry
+| order by admin_division asc
+
+// 6. Zadania w kolejności zależności.
+// Zasila: ekran 2 aplikacji i walidację notebooka activation_engine.
+// Oczekiwany wynik: dependency_order od 1 do 5 dla modułów 1,2,4,5,7.
+activation_plan
+| summarize tasks=count(), divisions=dcount(admin_division) by dependency_order, task_module_id, task_module_name
+| order by dependency_order asc
+
+// 7. Blokady z komentarzem operacyjnym.
+// Zasila: ekran RCB i tooltip „blokada”.
+// Oczekiwany wynik: rekordy ze statusem zablokowane, np. łączność/transport/energia.
+fact_readiness_declaration
+| where status == "zablokowane"
+| project timestamp, event_id, admin_division, task_module_id, status, comment, forces_and_assets
+| order by timestamp desc
+
+// 8. Oś aktywacji modułów D-1…D+10.
+// Zasila: stronę raportu „Postęp aktywacji w zdarzeniu”.
+// Oczekiwany wynik: 79 aktywacji, status aktywny do D+7 i wygaszanie później.
+fact_task_activation
+| where event_id == "POWODZ_WRZESIEN_2026"
+| summarize activations=count() by day_offset, task_module_id, activation_status
+| order by day_offset asc, task_module_id asc

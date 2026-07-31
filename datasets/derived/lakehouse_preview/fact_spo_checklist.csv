@@ -1,0 +1,65 @@
+spo_code,step_number,step_description,responsible_admin_division,sla_hours,required_document
+SPO-1,1,Przyjąć meldunek i potwierdzić przesłanki uruchomienia procedury,I,2,meldunek_sytuacyjny.pdf
+SPO-1,2,Wyznaczyć resort wiodący i listę uczestników uzgodnień,I,6,lista_uczestnikow.xlsx
+SPO-1,3,"Przygotować projekt decyzji, komunikatu lub notatki dla RZZK",XIX,10,projekt_decyzji.docx
+SPO-1,4,Zarejestrować status wykonania i przekazać informację do RCB,I,14,potwierdzenie_wykonania.json
+SPO-2,1,Przyjąć meldunek i potwierdzić przesłanki uruchomienia procedury,I,2,meldunek_sytuacyjny.pdf
+SPO-2,2,Wyznaczyć resort wiodący i listę uczestników uzgodnień,I,6,lista_uczestnikow.xlsx
+SPO-2,3,"Przygotować projekt decyzji, komunikatu lub notatki dla RZZK",XIX,10,projekt_decyzji.docx
+SPO-2,4,Zarejestrować status wykonania i przekazać informację do RCB,I,14,potwierdzenie_wykonania.json
+SPO-3,1,Przyjąć meldunek i potwierdzić przesłanki uruchomienia procedury,I,2,meldunek_sytuacyjny.pdf
+SPO-3,2,Wyznaczyć resort wiodący i listę uczestników uzgodnień,I,6,lista_uczestnikow.xlsx
+SPO-3,3,"Przygotować projekt decyzji, komunikatu lub notatki dla RZZK",XIX,10,projekt_decyzji.docx
+SPO-3,4,Zarejestrować status wykonania i przekazać informację do RCB,I,14,potwierdzenie_wykonania.json
+SPO-4,1,Przyjąć meldunek i potwierdzić przesłanki uruchomienia procedury,I,2,meldunek_sytuacyjny.pdf
+SPO-4,2,Wyznaczyć resort wiodący i listę uczestników uzgodnień,I,6,lista_uczestnikow.xlsx
+SPO-4,3,"Przygotować projekt decyzji, komunikatu lub notatki dla RZZK",XIX,10,projekt_decyzji.docx
+SPO-4,4,Zarejestrować status wykonania i przekazać informację do RCB,I,14,potwierdzenie_wykonania.json
+SPO-5,1,Przyjąć meldunek i potwierdzić przesłanki uruchomienia procedury,I,2,meldunek_sytuacyjny.pdf
+SPO-5,2,Wyznaczyć resort wiodący i listę uczestników uzgodnień,I,6,lista_uczestnikow.xlsx
+SPO-5,3,"Przygotować projekt decyzji, komunikatu lub notatki dla RZZK",XIX,10,projekt_decyzji.docx
+SPO-5,4,Zarejestrować status wykonania i przekazać informację do RCB,I,14,potwierdzenie_wykonania.json
+SPO-6,1,Przyjąć meldunek i potwierdzić przesłanki uruchomienia procedury,I,2,meldunek_sytuacyjny.pdf
+SPO-6,2,Wyznaczyć resort wiodący i listę uczestników uzgodnień,I,6,lista_uczestnikow.xlsx
+SPO-6,3,"Przygotować projekt decyzji, komunikatu lub notatki dla RZZK",XIX,10,projekt_decyzji.docx
+SPO-6,4,Zarejestrować status wykonania i przekazać informację do RCB,I,14,potwierdzenie_wykonania.json
+SPO-7,1,Przyjąć meldunek i potwierdzić przesłanki uruchomienia procedury,XIV,2,meldunek_sytuacyjny.pdf
+SPO-7,2,Wyznaczyć resort wiodący i listę uczestników uzgodnień,XIV,6,lista_uczestnikow.xlsx
+SPO-7,3,"Przygotować projekt decyzji, komunikatu lub notatki dla RZZK",XIX,10,projekt_decyzji.docx
+SPO-7,4,Zarejestrować status wykonania i przekazać informację do RCB,I,14,potwierdzenie_wykonania.json
+SPO-8,1,Przyjąć meldunek i potwierdzić przesłanki uruchomienia procedury,XX,2,meldunek_sytuacyjny.pdf
+SPO-8,2,Wyznaczyć resort wiodący i listę uczestników uzgodnień,XX,6,lista_uczestnikow.xlsx
+SPO-8,3,"Przygotować projekt decyzji, komunikatu lub notatki dla RZZK",XIX,10,projekt_decyzji.docx
+SPO-8,4,Zarejestrować status wykonania i przekazać informację do RCB,I,14,potwierdzenie_wykonania.json
+SPO-9,1,Przyjąć meldunek i potwierdzić przesłanki uruchomienia procedury,I,2,meldunek_sytuacyjny.pdf
+SPO-9,2,Wyznaczyć resort wiodący i listę uczestników uzgodnień,I,6,lista_uczestnikow.xlsx
+SPO-9,3,"Przygotować projekt decyzji, komunikatu lub notatki dla RZZK",XIX,10,projekt_decyzji.docx
+SPO-9,4,Zarejestrować status wykonania i przekazać informację do RCB,I,14,potwierdzenie_wykonania.json
+SPO-10,1,Przyjąć meldunek i potwierdzić przesłanki uruchomienia procedury,I,2,meldunek_sytuacyjny.pdf
+SPO-10,2,Wyznaczyć resort wiodący i listę uczestników uzgodnień,I,6,lista_uczestnikow.xlsx
+SPO-10,3,"Przygotować projekt decyzji, komunikatu lub notatki dla RZZK",XIX,10,projekt_decyzji.docx
+SPO-10,4,Zarejestrować status wykonania i przekazać informację do RCB,I,14,potwierdzenie_wykonania.json
+SPO-11,1,Przyjąć meldunek i potwierdzić przesłanki uruchomienia procedury,XX,2,meldunek_sytuacyjny.pdf
+SPO-11,2,Wyznaczyć resort wiodący i listę uczestników uzgodnień,XX,6,lista_uczestnikow.xlsx
+SPO-11,3,"Przygotować projekt decyzji, komunikatu lub notatki dla RZZK",XIX,10,projekt_decyzji.docx
+SPO-11,4,Zarejestrować status wykonania i przekazać informację do RCB,I,14,potwierdzenie_wykonania.json
+SPO-12,1,Przyjąć meldunek i potwierdzić przesłanki uruchomienia procedury,I,2,meldunek_sytuacyjny.pdf
+SPO-12,2,Wyznaczyć resort wiodący i listę uczestników uzgodnień,I,6,lista_uczestnikow.xlsx
+SPO-12,3,"Przygotować projekt decyzji, komunikatu lub notatki dla RZZK",XIX,10,projekt_decyzji.docx
+SPO-12,4,Zarejestrować status wykonania i przekazać informację do RCB,I,14,potwierdzenie_wykonania.json
+SPO-13,1,Przyjąć meldunek i potwierdzić przesłanki uruchomienia procedury,XIV,2,meldunek_sytuacyjny.pdf
+SPO-13,2,Wyznaczyć resort wiodący i listę uczestników uzgodnień,XIV,6,lista_uczestnikow.xlsx
+SPO-13,3,"Przygotować projekt decyzji, komunikatu lub notatki dla RZZK",XIX,10,projekt_decyzji.docx
+SPO-13,4,Zarejestrować status wykonania i przekazać informację do RCB,I,14,potwierdzenie_wykonania.json
+SPO-14,1,Przyjąć meldunek i potwierdzić przesłanki uruchomienia procedury,XIV,2,meldunek_sytuacyjny.pdf
+SPO-14,2,Wyznaczyć resort wiodący i listę uczestników uzgodnień,XIV,6,lista_uczestnikow.xlsx
+SPO-14,3,"Przygotować projekt decyzji, komunikatu lub notatki dla RZZK",XIX,10,projekt_decyzji.docx
+SPO-14,4,Zarejestrować status wykonania i przekazać informację do RCB,I,14,potwierdzenie_wykonania.json
+SPO-15,1,Przyjąć meldunek i potwierdzić przesłanki uruchomienia procedury,I,2,meldunek_sytuacyjny.pdf
+SPO-15,2,Wyznaczyć resort wiodący i listę uczestników uzgodnień,I,6,lista_uczestnikow.xlsx
+SPO-15,3,"Przygotować projekt decyzji, komunikatu lub notatki dla RZZK",XIX,10,projekt_decyzji.docx
+SPO-15,4,Zarejestrować status wykonania i przekazać informację do RCB,I,14,potwierdzenie_wykonania.json
+SPO-16,1,Przyjąć meldunek i potwierdzić przesłanki uruchomienia procedury,I,2,meldunek_sytuacyjny.pdf
+SPO-16,2,Wyznaczyć resort wiodący i listę uczestników uzgodnień,I,6,lista_uczestnikow.xlsx
+SPO-16,3,"Przygotować projekt decyzji, komunikatu lub notatki dla RZZK",XIX,10,projekt_decyzji.docx
+SPO-16,4,Zarejestrować status wykonania i przekazać informację do RCB,I,14,potwierdzenie_wykonania.json

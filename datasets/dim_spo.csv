@@ -1,0 +1,17 @@
+spo_code,spo_name,related_hazards
+SPO-1,Organizacja posiedzenia Rządowego Zespołu Zarządzania Kryzysowego,Z02;Z04;Z07;Z12;Z20
+SPO-2,Uruchomienie dodatkowych środków finansowych,Z01;Z02;Z05;Z07;Z10;Z17;Z19
+SPO-3,Zasady informowania ludności o zagrożeniach – organizacja procesu komunikacji społecznej,Z01;Z02;Z03;Z04;Z07;Z12;Z16;Z20
+SPO-4,Tymczasowe przywrócenie kontroli granicznej na granicach RP,Z01;Z04;Z09;Z16
+SPO-5,Wprowadzenie stanu klęski żywiołowej,Z01;Z02;Z05;Z07;Z10;Z17;Z19
+SPO-6,Wprowadzenie stanu wyjątkowego,Z04;Z16;Z18;Z20
+SPO-7,Wprowadzenie stanu wojennego,Z04;Z16
+SPO-8,Postępowanie w sytuacji uprowadzenia terrorystycznego obywatela polskiego poza RP,Z16
+SPO-9,Działania w przypadku masowego napływu cudzoziemców,Z04;Z16
+SPO-10,Współpraca z właścicielami infrastruktury krytycznej w zakresie ochrony,Z03;Z07;Z09;Z12;Z14;Z17
+SPO-11,Organizacja ewakuacji obywateli polskich spoza granic kraju,Z15;Z16;Z17
+SPO-12,Obieg informacji między strukturami zarządzania kryzysowego,Z01;Z02;Z03;Z04;Z07;Z12;Z20
+SPO-13,Ostrzeganie wojsk oraz ludności cywilnej o zagrożeniu z powietrza,Z04;Z16
+SPO-14,Przekraczanie granic RP przez wojska sojusznicze,Z04;Z16
+SPO-15,Organizacja medycznego mostu powietrznego w zdarzeniu masowym,Z01;Z02;Z15;Z16;Z17
+SPO-16,Zwołanie i obsługa Zespołu do spraw Incydentów Krytycznych,Z03;Z04;Z12;Z20

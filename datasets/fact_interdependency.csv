@@ -1,0 +1,8 @@
+task_module_id,depends_on_task_module_id,dependency_reason
+2,1,dystrybucja pomocy wymaga rozpoznania sytuacji
+4,1,łączność zapasowa wymaga monitoringu awarii
+3,2,odbudowa po ewakuacji i zabezpieczeniu ludności
+3,4,odbudowa wymaga łączności koordynacyjnej
+5,1,wniosek o SZ RP wymaga potwierdzonego obrazu sytuacji
+6,2,pomoc humanitarna po identyfikacji potrzeb
+7,1,ochrona informacji musi bazować na spójnym obrazie sytuacji

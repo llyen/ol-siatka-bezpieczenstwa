@@ -1,0 +1,23 @@
+flowchart LR
+  subgraph Sources[Generated synthetic datasets]
+    H[dim_hazard]
+    A[dim_admin_division]
+    G[fact_safety_grid]
+    R[fact_readiness_declaration]
+    T[fact_task_activation]
+    S[dim_spo + checklist]
+  end
+  Sources --> LH[Fabric Lakehouse / Delta]
+  LH --> ENG[02 activation_engine]
+  LH --> GAP[03 gap_analysis]
+  LH --> GRAPH[04 graph_view]
+  ENG --> DER[datasets/derived]
+  GAP --> DER
+  GRAPH --> DER
+  LH --> SEM[Semantic model]
+  SEM --> PBI[Power BI report]
+  LH --> APP[Fabric App: Pulpit Koordynacji]
+  APP --> R
+  LH --> AGENT[Data Agent]
+  LH --> ACT[Data Activator]
+  ACT --> ALERT[Teams / e-mail / RZZK escalation]

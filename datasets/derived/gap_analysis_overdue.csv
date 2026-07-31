@@ -1,0 +1,29 @@
+hazard_code,phase,scale,task_module_id,task_module_name,admin_division,admin_name,ministry,role,criticality,sla_hours,dependency_order,status,deadline,hours_over_sla
+Z02,R,4,1,Monitorowanie i ostrzeganie,IV,Energia,Minister Klimatu i Środowiska,współpracujący,średnia,12,1,zablokowane,2026-09-15T20:00:00+02:00,40.0
+Z02,R,4,1,Monitorowanie i ostrzeganie,IX,Zdrowie,Minister Zdrowia,współpracujący,średnia,12,1,w toku,2026-09-15T20:00:00+02:00,40.0
+Z02,R,4,1,Monitorowanie i ostrzeganie,XIV,Obrona narodowa,Minister Obrony Narodowej,współpracujący,średnia,12,1,zablokowane,2026-09-15T20:00:00+02:00,40.0
+Z02,R,4,1,Monitorowanie i ostrzeganie,XXII,Transport,Minister Infrastruktury,współpracujący,średnia,12,1,zablokowane,2026-09-15T20:00:00+02:00,40.0
+Z02,R,4,1,Monitorowanie i ostrzeganie,XXIII,Zabezpieczenie społeczne,"Minister Rodziny, Pracy i Polityki Społecznej",współpracujący,średnia,12,1,nie rozpoczęto,2026-09-15T20:00:00+02:00,40.0
+Z02,R,4,2,Zabezpieczenie potrzeb ludności,VIII,Gospodarka wodna,Minister Infrastruktury,wiodący,wysoka,6,2,zablokowane,2026-09-15T14:00:00+02:00,46.0
+Z02,R,4,2,Zabezpieczenie potrzeb ludności,IV,Energia,Minister Klimatu i Środowiska,współpracujący,średnia,12,2,w toku,2026-09-15T20:00:00+02:00,40.0
+Z02,R,4,2,Zabezpieczenie potrzeb ludności,IX,Zdrowie,Minister Zdrowia,współpracujący,średnia,12,2,nie rozpoczęto,2026-09-15T20:00:00+02:00,40.0
+Z02,R,4,2,Zabezpieczenie potrzeb ludności,XIV,Obrona narodowa,Minister Obrony Narodowej,współpracujący,średnia,12,2,nie rozpoczęto,2026-09-15T20:00:00+02:00,40.0
+Z02,R,4,2,Zabezpieczenie potrzeb ludności,XXI,Środowisko,Minister Klimatu i Środowiska,współpracujący,średnia,12,2,nie rozpoczęto,2026-09-15T20:00:00+02:00,40.0
+Z02,R,4,2,Zabezpieczenie potrzeb ludności,XXIII,Zabezpieczenie społeczne,"Minister Rodziny, Pracy i Polityki Społecznej",współpracujący,średnia,12,2,w toku,2026-09-15T20:00:00+02:00,40.0
+Z02,R,4,4,Zapewnienie łączności,XIX,Sprawy wewnętrzne,Minister Spraw Wewnętrznych i Administracji,wiodący,wysoka,6,3,nie rozpoczęto,2026-09-15T14:00:00+02:00,46.0
+Z02,R,4,4,Zapewnienie łączności,IV,Energia,Minister Klimatu i Środowiska,współpracujący,średnia,12,3,zablokowane,2026-09-15T20:00:00+02:00,40.0
+Z02,R,4,4,Zapewnienie łączności,IX,Zdrowie,Minister Zdrowia,współpracujący,średnia,12,3,w toku,2026-09-15T20:00:00+02:00,40.0
+Z02,R,4,4,Zapewnienie łączności,XIII,Łączność,Minister Cyfryzacji,współpracujący,średnia,12,3,zablokowane,2026-09-15T20:00:00+02:00,40.0
+Z02,R,4,4,Zapewnienie łączności,XIV,Obrona narodowa,Minister Obrony Narodowej,współpracujący,średnia,12,3,w toku,2026-09-15T20:00:00+02:00,40.0
+Z02,R,4,4,Zapewnienie łączności,XXI,Środowisko,Minister Klimatu i Środowiska,współpracujący,średnia,12,3,w toku,2026-09-15T20:00:00+02:00,40.0
+Z02,R,4,4,Zapewnienie łączności,XXII,Transport,Minister Infrastruktury,współpracujący,średnia,12,3,zablokowane,2026-09-15T20:00:00+02:00,40.0
+Z02,R,4,4,Zapewnienie łączności,XXIII,Zabezpieczenie społeczne,"Minister Rodziny, Pracy i Polityki Społecznej",współpracujący,średnia,12,3,zablokowane,2026-09-15T20:00:00+02:00,40.0
+Z02,R,4,4,Zapewnienie łączności,XXIV,Klimat,Minister Klimatu i Środowiska,współpracujący,średnia,12,3,nie rozpoczęto,2026-09-15T20:00:00+02:00,40.0
+Z02,R,4,5,Wsparcie sił zbrojnych,VIII,Gospodarka wodna,Minister Infrastruktury,wiodący,wysoka,6,4,nie rozpoczęto,2026-09-15T14:00:00+02:00,46.0
+Z02,R,4,5,Wsparcie sił zbrojnych,XIX,Sprawy wewnętrzne,Minister Spraw Wewnętrznych i Administracji,wiodący,wysoka,6,4,nie rozpoczęto,2026-09-15T14:00:00+02:00,46.0
+Z02,R,4,7,Ochrona informacji,VIII,Gospodarka wodna,Minister Infrastruktury,wiodący,wysoka,6,5,zablokowane,2026-09-15T14:00:00+02:00,46.0
+Z02,R,4,7,Ochrona informacji,IV,Energia,Minister Klimatu i Środowiska,współpracujący,średnia,12,5,w toku,2026-09-15T20:00:00+02:00,40.0
+Z02,R,4,7,Ochrona informacji,IX,Zdrowie,Minister Zdrowia,współpracujący,średnia,12,5,nie rozpoczęto,2026-09-15T20:00:00+02:00,40.0
+Z02,R,4,7,Ochrona informacji,XIV,Obrona narodowa,Minister Obrony Narodowej,współpracujący,średnia,12,5,nie rozpoczęto,2026-09-15T20:00:00+02:00,40.0
+Z02,R,4,7,Ochrona informacji,XXI,Środowisko,Minister Klimatu i Środowiska,współpracujący,średnia,12,5,nie rozpoczęto,2026-09-15T20:00:00+02:00,40.0
+Z02,R,4,7,Ochrona informacji,XXIII,Zabezpieczenie społeczne,"Minister Rodziny, Pracy i Polityki Społecznej",współpracujący,średnia,12,5,w toku,2026-09-15T20:00:00+02:00,40.0

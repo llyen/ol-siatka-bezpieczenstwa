@@ -1,0 +1,74 @@
+// report_queries.kql
+// Zapytania analityczne dla pięciu stron raportu Power BI. Komentarz przed każdym
+// zapytaniem wskazuje wizualizację i oczekiwany wynik na danych demo.
+
+// 1. Strona 1 / kafelki ryzyka: lista zagrożeń z kolorem i wynikiem.
+// Oczekiwany wynik: 20 wierszy, posortowane malejąco po risk_score.
+dim_hazard
+| project hazard_code, hazard_name, category, probability, impact, risk_score, risk_level, color
+| order by risk_score desc, hazard_code asc
+
+// 2. Strona 1 / macierz probability × impact.
+// Oczekiwany wynik: agregacja liczby zagrożeń w komórkach matrycy.
+dim_hazard
+| summarize hazards=count(), examples=make_set(hazard_code) by probability, impact, color
+| order by probability asc, impact asc
+
+// 3. Strona 2 / siatka bezpieczeństwa dla powodzi w reagowaniu.
+// Oczekiwany wynik: 25 działów dla Z02/R, z rolą i listą modułów.
+fact_safety_grid
+| where hazard_code == "Z02" and phase == "R"
+| join kind=leftouter dim_admin_division on admin_division
+| project hazard_code, phase, admin_division, admin_name, ministry, role, criticality, task_modules
+| order by role asc, admin_division asc
+
+// 4. Strona 2 / liczba komórek według roli i fazy.
+// Oczekiwany wynik: porównanie reagowania i odbudowy dla wybranego zagrożenia.
+fact_safety_grid
+| where hazard_code == "Z02"
+| summarize cells=count() by phase, role
+| order by phase asc, role asc
+
+// 5. Strona 3 / panel działu XIX Sprawy wewnętrzne.
+// Oczekiwany wynik: zadania działu z planu aktywacji, z SLA i kolejnością zależności.
+activation_plan
+| where admin_division == "XIX"
+| project task_module_id, task_module_name, role, criticality, sla_hours, dependency_order
+| order by dependency_order asc
+
+// 6. Strona 3 / statusy gotowości działu.
+// Oczekiwany wynik: liczba deklaracji per status dla wybranego działu.
+fact_readiness_declaration
+| where admin_division == "XIX"
+| summarize declarations=count() by status
+| order by declarations desc
+
+// 7. Strona 4 / postęp aktywacji w osi D-1..D+10.
+// Oczekiwany wynik: aktywacje pogrupowane po dniu i statusie.
+fact_task_activation
+| where event_id == "POWODZ_WRZESIEN_2026"
+| summarize activations=count() by day_offset, activation_status
+| order by day_offset asc
+
+// 8. Strona 5 / analiza luk - zadania po SLA.
+// Oczekiwany wynik: lista 28 zadań po SLA w wygenerowanych danych.
+gap_analysis_overdue
+| where hours_over_sla > 0
+| project admin_division, task_module_id, task_module_name, status, deadline, hours_over_sla
+| order by hours_over_sla desc
+
+// 9. Strona 5 / przeciążone działy wiodące.
+// Oczekiwany wynik: VIII i XIX z lead_count=5 dla planu Z02/R/4.
+activation_plan
+| where role == "wiodący"
+| summarize lead_count=count() by admin_division, ministry
+| where lead_count >= 4
+| order by lead_count desc
+
+// 10. Strona 5 / heat-map ryzyko × gotowość.
+// Oczekiwany wynik: połączenie ryzyka zagrożenia z procentem gotowości deklaracji.
+dim_hazard
+| where hazard_code == "Z02"
+| extend join_key=1
+| join kind=inner (fact_readiness_declaration | summarize ready=countif(status == "gotowe"), total=count() | extend readiness_pct=todouble(ready)/todouble(total), join_key=1) on join_key
+| project hazard_code, hazard_name, risk_score, readiness_pct, risk_readiness_score=risk_score * (1.0 - readiness_pct)

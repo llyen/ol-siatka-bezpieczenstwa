@@ -1,0 +1,17 @@
+{
+  "plan_tasks": 44,
+  "not_ready_tasks": 28,
+  "overdue_tasks": 28,
+  "blocked_tasks": 9,
+  "overloaded_leading_divisions": {
+    "VIII": 5,
+    "XIX": 5
+  },
+  "critical_path_modules": [
+    1,
+    2,
+    4,
+    3
+  ],
+  "analysis_time": "2026-09-17T12:00:00+02:00"
+}
