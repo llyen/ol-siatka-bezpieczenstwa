@@ -1,0 +1,1160 @@
+{
+  "$schema": "https://pbiadx.powerbi.com/static/d/schema/60/dashboard.json",
+  "id": "23a3e42c-bf62-6fa2-91aa-2a2bbc9cac07",
+  "eTag": "",
+  "schema_version": "60",
+  "title": "OL_SIA_Dashboard",
+  "autoRefresh": {
+    "enabled": true,
+    "defaultInterval": "10s",
+    "minInterval": "10s"
+  },
+  "tiles": [
+    {
+      "id": "7f80f3e6-7cfe-010e-be43-8e7f9910d44d",
+      "title": "Puls koordynacji",
+      "visualType": "multistat",
+      "pageId": "feb4db5b-2445-2a98-51b3-c60dd0340356",
+      "layout": {
+        "x": 0,
+        "y": 0,
+        "width": 6,
+        "height": 3
+      },
+      "queryRef": {
+        "kind": "query",
+        "queryId": "302e2845-808a-5d40-538e-e38bcd54d11a"
+      },
+      "visualOptions": {
+        "multiStat__slot": {
+          "width": 4,
+          "height": 1
+        },
+        "multiStat__valueColumn": "Wartosc",
+        "colorRules": [],
+        "multiStat__textSize": "auto",
+        "multiStat__labelColumn": "Wskaznik",
+        "colorRulesDisabled": true,
+        "colorStyle": "light",
+        "multiStat__displayOrientation": "horizontal"
+      }
+    },
+    {
+      "id": "be8be7ef-196b-8476-891a-b134a11fc203",
+      "title": "Naplyw deklaracji gotowosci",
+      "visualType": "line",
+      "pageId": "feb4db5b-2445-2a98-51b3-c60dd0340356",
+      "layout": {
+        "x": 12,
+        "y": 0,
+        "width": 12,
+        "height": 8
+      },
+      "queryRef": {
+        "kind": "query",
+        "queryId": "eed60eb8-2954-3c1d-d93b-45861a09aeb1"
+      },
+      "visualOptions": {
+        "hideLegend": false,
+        "xColumn": "timestamp",
+        "yColumns": [
+          "Deklaracje"
+        ],
+        "crossFilter": [],
+        "crossFilterDisabled": false,
+        "seriesColumns": [
+          "status"
+        ],
+        "legendLocation": "bottom",
+        "drillthroughDisabled": false,
+        "multipleYAxes": {
+          "base": {
+            "label": "",
+            "yAxisMaximumValue": null,
+            "yAxisScale": "linear",
+            "id": "-1",
+            "yAxisMinimumValue": null,
+            "horizontalLines": [],
+            "columns": []
+          },
+          "additional": [],
+          "showMultiplePanels": false
+        },
+        "xColumnTitle": "Czas",
+        "drillthrough": [],
+        "verticalLine": "",
+        "xAxisScale": "linear"
+      }
+    },
+    {
+      "id": "3f2373d0-1d3f-2c45-6bfb-bd8386aa1438",
+      "title": "Struktura odpowiedzi dzialow",
+      "visualType": "pie",
+      "pageId": "feb4db5b-2445-2a98-51b3-c60dd0340356",
+      "layout": {
+        "x": 0,
+        "y": 8,
+        "width": 6,
+        "height": 8
+      },
+      "queryRef": {
+        "kind": "query",
+        "queryId": "f36ed26a-6a56-65e6-c502-2d69d2492643"
+      },
+      "visualOptions": {
+        "legendLocation": "right",
+        "pie__orderBy": "size",
+        "xColumn": "status",
+        "yColumns": [
+          "Deklaracje"
+        ],
+        "hideLegend": false,
+        "pie__kind": "donut",
+        "pie__label": [
+          "name",
+          "percentage"
+        ]
+      }
+    },
+    {
+      "id": "5830c379-30a3-ebc9-7123-8771e81a1f01",
+      "title": "Aktywacja modulow zadaniowych",
+      "visualType": "table",
+      "pageId": "feb4db5b-2445-2a98-51b3-c60dd0340356",
+      "layout": {
+        "x": 12,
+        "y": 8,
+        "width": 12,
+        "height": 7
+      },
+      "queryRef": {
+        "kind": "query",
+        "queryId": "8e5b85d8-a386-90b9-1674-dd62a8958b70"
+      },
+      "visualOptions": {
+        "crossFilter": [],
+        "table__enableRenderLinks": true,
+        "colorRules": [],
+        "colorStyle": "light",
+        "table__renderLinks": [],
+        "colorRulesDisabled": true,
+        "drillthrough": [],
+        "drillthroughDisabled": false,
+        "crossFilterDisabled": false
+      }
+    },
+    {
+      "id": "d5af3b08-9401-4b8a-b4ec-b516b5caa3b0",
+      "title": "Kalendarz uruchamiania modulow",
+      "visualType": "line",
+      "pageId": "feb4db5b-2445-2a98-51b3-c60dd0340356",
+      "layout": {
+        "x": 0,
+        "y": 16,
+        "width": 12,
+        "height": 8
+      },
+      "queryRef": {
+        "kind": "query",
+        "queryId": "887f556b-e5c2-40e1-613c-13303e780708"
+      },
+      "visualOptions": {
+        "hideLegend": false,
+        "xColumn": "timestamp",
+        "yColumns": [
+          "Zdarzenia"
+        ],
+        "crossFilter": [],
+        "crossFilterDisabled": false,
+        "seriesColumns": [
+          "task_module_name"
+        ],
+        "legendLocation": "bottom",
+        "drillthroughDisabled": false,
+        "multipleYAxes": {
+          "base": {
+            "label": "",
+            "yAxisMaximumValue": null,
+            "yAxisScale": "linear",
+            "id": "-1",
+            "yAxisMinimumValue": null,
+            "horizontalLines": [],
+            "columns": []
+          },
+          "additional": [],
+          "showMultiplePanels": false
+        },
+        "xColumnTitle": "Czas",
+        "drillthrough": [],
+        "verticalLine": "",
+        "xAxisScale": "linear"
+      }
+    },
+    {
+      "id": "cff58a70-4217-bca2-5f75-3a1dc7e46778",
+      "title": "Luka gotowosci - stan biezacy",
+      "visualType": "pie",
+      "pageId": "feb4db5b-2445-2a98-51b3-c60dd0340356",
+      "layout": {
+        "x": 12,
+        "y": 16,
+        "width": 6,
+        "height": 8
+      },
+      "queryRef": {
+        "kind": "query",
+        "queryId": "9a401752-cfed-591a-7338-5552da962760"
+      },
+      "visualOptions": {
+        "legendLocation": "right",
+        "pie__orderBy": "size",
+        "xColumn": "status",
+        "yColumns": [
+          "Zadania"
+        ],
+        "hideLegend": false,
+        "pie__kind": "donut",
+        "pie__label": [
+          "name",
+          "percentage"
+        ]
+      }
+    },
+    {
+      "id": "6816cd64-779c-55ef-94e7-f22f5bafc60a",
+      "title": "Kto jeszcze nie odpowiedzial",
+      "visualType": "column",
+      "pageId": "feb4db5b-2445-2a98-51b3-c60dd0340356",
+      "layout": {
+        "x": 0,
+        "y": 24,
+        "width": 12,
+        "height": 8
+      },
+      "queryRef": {
+        "kind": "query",
+        "queryId": "8beb7b2b-84b2-c32f-c307-174c55aab185"
+      },
+      "visualOptions": {
+        "hideLegend": false,
+        "xColumn": "Dzial",
+        "yColumns": [
+          "Brakujace",
+          "Wiodace"
+        ],
+        "crossFilter": [],
+        "crossFilterDisabled": false,
+        "seriesColumns": null,
+        "legendLocation": "bottom",
+        "drillthroughDisabled": false,
+        "multipleYAxes": {
+          "base": {
+            "label": "",
+            "yAxisMaximumValue": null,
+            "yAxisScale": "linear",
+            "id": "-1",
+            "yAxisMinimumValue": null,
+            "horizontalLines": [],
+            "columns": []
+          },
+          "additional": [],
+          "showMultiplePanels": false
+        },
+        "xColumnTitle": "Dzial administracji",
+        "drillthrough": [],
+        "verticalLine": "",
+        "xAxisScale": "linear"
+      }
+    },
+    {
+      "id": "059d4884-c06b-ea95-b06c-58aa4e4649df",
+      "title": "Blokady zgloszone przez dzialy",
+      "visualType": "table",
+      "pageId": "feb4db5b-2445-2a98-51b3-c60dd0340356",
+      "layout": {
+        "x": 12,
+        "y": 24,
+        "width": 12,
+        "height": 7
+      },
+      "queryRef": {
+        "kind": "query",
+        "queryId": "033b3bdd-f1d4-ae0c-8e10-3aa09cb25223"
+      },
+      "visualOptions": {
+        "crossFilter": [],
+        "table__enableRenderLinks": true,
+        "colorRules": [],
+        "colorStyle": "light",
+        "table__renderLinks": [],
+        "colorRulesDisabled": true,
+        "drillthrough": [],
+        "drillthroughDisabled": false,
+        "crossFilterDisabled": false
+      }
+    },
+    {
+      "id": "ecc2b054-93cd-b2f2-f4c6-f6cfd736d7ad",
+      "title": "Obciazenie dzialow rola wiodaca",
+      "visualType": "column",
+      "pageId": "8c45d12f-2caa-0727-194f-3b6a81b63b2d",
+      "layout": {
+        "x": 0,
+        "y": 0,
+        "width": 12,
+        "height": 8
+      },
+      "queryRef": {
+        "kind": "query",
+        "queryId": "e8935c7a-619a-0608-0d03-85cf9c8c0081"
+      },
+      "visualOptions": {
+        "hideLegend": false,
+        "xColumn": "Dzial",
+        "yColumns": [
+          "Wiodace",
+          "Zadania"
+        ],
+        "crossFilter": [],
+        "crossFilterDisabled": false,
+        "seriesColumns": null,
+        "legendLocation": "bottom",
+        "drillthroughDisabled": false,
+        "multipleYAxes": {
+          "base": {
+            "label": "",
+            "yAxisMaximumValue": null,
+            "yAxisScale": "linear",
+            "id": "-1",
+            "yAxisMinimumValue": null,
+            "horizontalLines": [],
+            "columns": []
+          },
+          "additional": [],
+          "showMultiplePanels": false
+        },
+        "xColumnTitle": "Dzial administracji",
+        "drillthrough": [],
+        "verticalLine": "",
+        "xAxisScale": "linear"
+      }
+    },
+    {
+      "id": "adddc9f3-a6d7-c43c-1a72-782cf468b075",
+      "title": "Macierz gotowosci: dzial x modul",
+      "visualType": "table",
+      "pageId": "8c45d12f-2caa-0727-194f-3b6a81b63b2d",
+      "layout": {
+        "x": 12,
+        "y": 0,
+        "width": 12,
+        "height": 7
+      },
+      "queryRef": {
+        "kind": "query",
+        "queryId": "b4adad82-ad07-8abc-5388-2cab15a4797b"
+      },
+      "visualOptions": {
+        "crossFilter": [],
+        "table__enableRenderLinks": true,
+        "colorRules": [],
+        "colorStyle": "light",
+        "table__renderLinks": [],
+        "colorRulesDisabled": true,
+        "drillthrough": [],
+        "drillthroughDisabled": false,
+        "crossFilterDisabled": false
+      }
+    },
+    {
+      "id": "0d4364c9-798c-26c9-f84a-91cf9227dac6",
+      "title": "Braki i blokady wg resortu",
+      "visualType": "column",
+      "pageId": "8c45d12f-2caa-0727-194f-3b6a81b63b2d",
+      "layout": {
+        "x": 0,
+        "y": 8,
+        "width": 12,
+        "height": 8
+      },
+      "queryRef": {
+        "kind": "query",
+        "queryId": "279af0d8-0a57-8acc-21f8-44547d26f78d"
+      },
+      "visualOptions": {
+        "hideLegend": false,
+        "xColumn": "Resort",
+        "yColumns": [
+          "Zadania"
+        ],
+        "crossFilter": [],
+        "crossFilterDisabled": false,
+        "seriesColumns": [
+          "status"
+        ],
+        "legendLocation": "bottom",
+        "drillthroughDisabled": false,
+        "multipleYAxes": {
+          "base": {
+            "label": "",
+            "yAxisMaximumValue": null,
+            "yAxisScale": "linear",
+            "id": "-1",
+            "yAxisMinimumValue": null,
+            "horizontalLines": [],
+            "columns": []
+          },
+          "additional": [],
+          "showMultiplePanels": false
+        },
+        "xColumnTitle": "Resort",
+        "drillthrough": [],
+        "verticalLine": "",
+        "xAxisScale": "linear"
+      }
+    },
+    {
+      "id": "85938ef3-f393-e443-884a-b7bbdc318aff",
+      "title": "Blokady na sciezce krytycznej",
+      "visualType": "table",
+      "pageId": "8c45d12f-2caa-0727-194f-3b6a81b63b2d",
+      "layout": {
+        "x": 12,
+        "y": 8,
+        "width": 12,
+        "height": 7
+      },
+      "queryRef": {
+        "kind": "query",
+        "queryId": "bac36a63-32a1-6216-75a3-da010430f256"
+      },
+      "visualOptions": {
+        "crossFilter": [],
+        "table__enableRenderLinks": true,
+        "colorRules": [],
+        "colorStyle": "light",
+        "table__renderLinks": [],
+        "colorRulesDisabled": true,
+        "drillthrough": [],
+        "drillthroughDisabled": false,
+        "crossFilterDisabled": false
+      }
+    },
+    {
+      "id": "0deb3d08-5323-2435-9a44-6900c3da2354",
+      "title": "Sily i srodki zadeklarowane",
+      "visualType": "table",
+      "pageId": "8c45d12f-2caa-0727-194f-3b6a81b63b2d",
+      "layout": {
+        "x": 0,
+        "y": 16,
+        "width": 12,
+        "height": 7
+      },
+      "queryRef": {
+        "kind": "query",
+        "queryId": "bdbfc450-7fa4-babf-d056-a589abdf2e23"
+      },
+      "visualOptions": {
+        "crossFilter": [],
+        "table__enableRenderLinks": true,
+        "colorRules": [],
+        "colorStyle": "light",
+        "table__renderLinks": [],
+        "colorRulesDisabled": true,
+        "drillthrough": [],
+        "drillthroughDisabled": false,
+        "crossFilterDisabled": false
+      }
+    },
+    {
+      "id": "cf03ca81-41e0-f2ed-a28a-cf69fd30b9c1",
+      "title": "Siatka bezpieczenstwa: powodz, faza reagowania",
+      "visualType": "table",
+      "pageId": "7fc55d8c-031a-e6a3-73f2-9b4f5f81f97b",
+      "layout": {
+        "x": 0,
+        "y": 0,
+        "width": 12,
+        "height": 7
+      },
+      "queryRef": {
+        "kind": "query",
+        "queryId": "955d885e-27f0-1092-283e-5b78081521a8"
+      },
+      "visualOptions": {
+        "crossFilter": [],
+        "table__enableRenderLinks": true,
+        "colorRules": [],
+        "colorStyle": "light",
+        "table__renderLinks": [],
+        "colorRulesDisabled": true,
+        "drillthrough": [],
+        "drillthroughDisabled": false,
+        "crossFilterDisabled": false
+      }
+    },
+    {
+      "id": "2517d9b2-d8a4-fd1b-a629-c3c5296f62a2",
+      "title": "Podzial rol w siatce",
+      "visualType": "pie",
+      "pageId": "7fc55d8c-031a-e6a3-73f2-9b4f5f81f97b",
+      "layout": {
+        "x": 12,
+        "y": 0,
+        "width": 6,
+        "height": 8
+      },
+      "queryRef": {
+        "kind": "query",
+        "queryId": "adb2dadf-ad45-0d15-b566-3496584ab6b7"
+      },
+      "visualOptions": {
+        "legendLocation": "right",
+        "pie__orderBy": "size",
+        "xColumn": "Rola",
+        "yColumns": [
+          "Wpisy"
+        ],
+        "hideLegend": false,
+        "pie__kind": "donut",
+        "pie__label": [
+          "name",
+          "percentage"
+        ]
+      }
+    },
+    {
+      "id": "77bc4bc4-efdf-67a9-bec9-26acd5d10d17",
+      "title": "Moduly wg liczby zaangazowanych dzialow",
+      "visualType": "column",
+      "pageId": "7fc55d8c-031a-e6a3-73f2-9b4f5f81f97b",
+      "layout": {
+        "x": 0,
+        "y": 8,
+        "width": 12,
+        "height": 8
+      },
+      "queryRef": {
+        "kind": "query",
+        "queryId": "abde8c5f-0c33-404f-4214-da2db13200fe"
+      },
+      "visualOptions": {
+        "hideLegend": false,
+        "xColumn": "Modul",
+        "yColumns": [
+          "Dzialy",
+          "Wiodace"
+        ],
+        "crossFilter": [],
+        "crossFilterDisabled": false,
+        "seriesColumns": null,
+        "legendLocation": "bottom",
+        "drillthroughDisabled": false,
+        "multipleYAxes": {
+          "base": {
+            "label": "",
+            "yAxisMaximumValue": null,
+            "yAxisScale": "linear",
+            "id": "-1",
+            "yAxisMinimumValue": null,
+            "horizontalLines": [],
+            "columns": []
+          },
+          "additional": [],
+          "showMultiplePanels": false
+        },
+        "xColumnTitle": "Modul zadaniowy",
+        "drillthrough": [],
+        "verticalLine": "",
+        "xAxisScale": "linear"
+      }
+    },
+    {
+      "id": "f3389cbc-64f3-ca89-dc43-1328d87bcbfb",
+      "title": "Wspolzaleznosci modulow zadaniowych",
+      "visualType": "table",
+      "pageId": "7fc55d8c-031a-e6a3-73f2-9b4f5f81f97b",
+      "layout": {
+        "x": 12,
+        "y": 8,
+        "width": 12,
+        "height": 7
+      },
+      "queryRef": {
+        "kind": "query",
+        "queryId": "25e11a92-b499-9a52-c08c-5f5812e451d2"
+      },
+      "visualOptions": {
+        "crossFilter": [],
+        "table__enableRenderLinks": true,
+        "colorRules": [],
+        "colorStyle": "light",
+        "table__renderLinks": [],
+        "colorRulesDisabled": true,
+        "drillthrough": [],
+        "drillthroughDisabled": false,
+        "crossFilterDisabled": false
+      }
+    },
+    {
+      "id": "5e80afac-3cfd-60fd-905f-dd101ed5a042",
+      "title": "Pokrycie siatki wg faz zarzadzania kryzysowego",
+      "visualType": "column",
+      "pageId": "7fc55d8c-031a-e6a3-73f2-9b4f5f81f97b",
+      "layout": {
+        "x": 0,
+        "y": 16,
+        "width": 12,
+        "height": 8
+      },
+      "queryRef": {
+        "kind": "query",
+        "queryId": "10505c49-39bc-5e7d-d3b1-60d2981a9939"
+      },
+      "visualOptions": {
+        "hideLegend": false,
+        "xColumn": "Faza",
+        "yColumns": [
+          "Wpisy"
+        ],
+        "crossFilter": [],
+        "crossFilterDisabled": false,
+        "seriesColumns": [
+          "Zagrozenie"
+        ],
+        "legendLocation": "bottom",
+        "drillthroughDisabled": false,
+        "multipleYAxes": {
+          "base": {
+            "label": "",
+            "yAxisMaximumValue": null,
+            "yAxisScale": "linear",
+            "id": "-1",
+            "yAxisMinimumValue": null,
+            "horizontalLines": [],
+            "columns": []
+          },
+          "additional": [],
+          "showMultiplePanels": false
+        },
+        "xColumnTitle": "Faza ZK",
+        "drillthrough": [],
+        "verticalLine": "",
+        "xAxisScale": "linear"
+      }
+    },
+    {
+      "id": "4ed7070a-1e7b-da19-4a02-cd24b1e6e329",
+      "title": "Procedura SPO dla zagrozenia powodziowego",
+      "visualType": "table",
+      "pageId": "2b3e4eff-77b8-8053-c97b-493c59bbea62",
+      "layout": {
+        "x": 0,
+        "y": 0,
+        "width": 12,
+        "height": 7
+      },
+      "queryRef": {
+        "kind": "query",
+        "queryId": "10240ecf-511e-2863-d2f1-fb857513c2ad"
+      },
+      "visualOptions": {
+        "crossFilter": [],
+        "table__enableRenderLinks": true,
+        "colorRules": [],
+        "colorStyle": "light",
+        "table__renderLinks": [],
+        "colorRulesDisabled": true,
+        "drillthrough": [],
+        "drillthroughDisabled": false,
+        "crossFilterDisabled": false
+      }
+    },
+    {
+      "id": "53bf4c6e-e477-d6b9-3684-5a9c83536bda",
+      "title": "Najkrotsze SLA w procedurach powodziowych",
+      "visualType": "column",
+      "pageId": "2b3e4eff-77b8-8053-c97b-493c59bbea62",
+      "layout": {
+        "x": 12,
+        "y": 0,
+        "width": 12,
+        "height": 8
+      },
+      "queryRef": {
+        "kind": "query",
+        "queryId": "97ff455d-11ae-0e94-cb23-a62a8e3a43e5"
+      },
+      "visualOptions": {
+        "hideLegend": false,
+        "xColumn": "Dzial",
+        "yColumns": [
+          "Min_SLA_h",
+          "Sredni_SLA_h"
+        ],
+        "crossFilter": [],
+        "crossFilterDisabled": false,
+        "seriesColumns": null,
+        "legendLocation": "bottom",
+        "drillthroughDisabled": false,
+        "multipleYAxes": {
+          "base": {
+            "label": "",
+            "yAxisMaximumValue": null,
+            "yAxisScale": "linear",
+            "id": "-1",
+            "yAxisMinimumValue": null,
+            "horizontalLines": [],
+            "columns": []
+          },
+          "additional": [],
+          "showMultiplePanels": false
+        },
+        "xColumnTitle": "Dzial administracji",
+        "drillthrough": [],
+        "verticalLine": "",
+        "xAxisScale": "linear"
+      }
+    },
+    {
+      "id": "3703080d-5ce4-0a0f-126c-cccaa7c64f7b",
+      "title": "Punkty kontaktowe sluzby dyzurnej",
+      "visualType": "table",
+      "pageId": "2b3e4eff-77b8-8053-c97b-493c59bbea62",
+      "layout": {
+        "x": 0,
+        "y": 8,
+        "width": 12,
+        "height": 7
+      },
+      "queryRef": {
+        "kind": "query",
+        "queryId": "47b55550-509f-7c80-2262-9bbd655c3295"
+      },
+      "visualOptions": {
+        "crossFilter": [],
+        "table__enableRenderLinks": true,
+        "colorRules": [],
+        "colorStyle": "light",
+        "table__renderLinks": [],
+        "colorRulesDisabled": true,
+        "drillthrough": [],
+        "drillthroughDisabled": false,
+        "crossFilterDisabled": false
+      }
+    },
+    {
+      "id": "b124e61a-b026-dbea-a337-a1b54c2cf331",
+      "title": "Matryca ryzyka: prawdopodobienstwo x skutki",
+      "visualType": "table",
+      "pageId": "854993c4-b245-5b12-5f35-937512dbe482",
+      "layout": {
+        "x": 0,
+        "y": 0,
+        "width": 12,
+        "height": 7
+      },
+      "queryRef": {
+        "kind": "query",
+        "queryId": "dfca233e-cb6a-f5c0-520d-8ba2386e31ec"
+      },
+      "visualOptions": {
+        "crossFilter": [],
+        "table__enableRenderLinks": true,
+        "colorRules": [],
+        "colorStyle": "light",
+        "table__renderLinks": [],
+        "colorRulesDisabled": true,
+        "drillthrough": [],
+        "drillthroughDisabled": false,
+        "crossFilterDisabled": false
+      }
+    },
+    {
+      "id": "2596c3f8-0129-a2df-73c7-46e699c1acd4",
+      "title": "Zagrozenia wg kategorii",
+      "visualType": "column",
+      "pageId": "854993c4-b245-5b12-5f35-937512dbe482",
+      "layout": {
+        "x": 12,
+        "y": 0,
+        "width": 12,
+        "height": 8
+      },
+      "queryRef": {
+        "kind": "query",
+        "queryId": "625ee750-54ba-577e-2999-35762194fe6b"
+      },
+      "visualOptions": {
+        "hideLegend": false,
+        "xColumn": "Kategoria",
+        "yColumns": [
+          "Zagrozenia",
+          "Max_ryzyko"
+        ],
+        "crossFilter": [],
+        "crossFilterDisabled": false,
+        "seriesColumns": null,
+        "legendLocation": "bottom",
+        "drillthroughDisabled": false,
+        "multipleYAxes": {
+          "base": {
+            "label": "",
+            "yAxisMaximumValue": null,
+            "yAxisScale": "linear",
+            "id": "-1",
+            "yAxisMinimumValue": null,
+            "horizontalLines": [],
+            "columns": []
+          },
+          "additional": [],
+          "showMultiplePanels": false
+        },
+        "xColumnTitle": "Kategoria zagrozenia",
+        "drillthrough": [],
+        "verticalLine": "",
+        "xAxisScale": "linear"
+      }
+    },
+    {
+      "id": "2d1ec1cc-1df4-e96f-8081-801465a60975",
+      "title": "Zagrozenia o najwyzszym ryzyku",
+      "visualType": "column",
+      "pageId": "854993c4-b245-5b12-5f35-937512dbe482",
+      "layout": {
+        "x": 0,
+        "y": 8,
+        "width": 12,
+        "height": 8
+      },
+      "queryRef": {
+        "kind": "query",
+        "queryId": "616a5fd2-c42f-5a1f-bf42-dcd0943d7734"
+      },
+      "visualOptions": {
+        "hideLegend": false,
+        "xColumn": "Zagrozenie",
+        "yColumns": [
+          "Ryzyko"
+        ],
+        "crossFilter": [],
+        "crossFilterDisabled": false,
+        "seriesColumns": null,
+        "legendLocation": "bottom",
+        "drillthroughDisabled": false,
+        "multipleYAxes": {
+          "base": {
+            "label": "",
+            "yAxisMaximumValue": null,
+            "yAxisScale": "linear",
+            "id": "-1",
+            "yAxisMinimumValue": null,
+            "horizontalLines": [],
+            "columns": []
+          },
+          "additional": [],
+          "showMultiplePanels": false
+        },
+        "xColumnTitle": "Zagrozenie",
+        "drillthrough": [],
+        "verticalLine": "",
+        "xAxisScale": "linear"
+      }
+    }
+  ],
+  "baseQueries": [],
+  "parameters": [
+    {
+      "kind": "duration",
+      "id": "f6525306-43cb-8bc1-8b8d-c1ca0e19eabc",
+      "displayName": "Zakres czasu",
+      "description": "Ruchome okno ostatnich 15 minut zegara. Scenariusz biegnie w tempie 60x, wiec okno obejmuje ok. 15 godzin akcji i przesuwa sie razem z zegarem.",
+      "beginVariableName": "_startTime",
+      "endVariableName": "_endTime",
+      "defaultValue": {
+        "kind": "dynamic",
+        "count": 15,
+        "unit": "minutes"
+      },
+      "showOnPages": {
+        "kind": "all"
+      }
+    }
+  ],
+  "dataSources": [
+    {
+      "kind": "kusto-trident",
+      "scopeId": "kusto-trident",
+      "clusterUri": "https://trd-j90bphmup0kwg093yy.z3.kusto.fabric.microsoft.com",
+      "database": "a27ff4b5-c68b-4cf8-a4e2-4295a3e9b7ec",
+      "name": "OL_SIA_Eventhouse",
+      "id": "5532c541-9928-14a9-994c-01625ee03d53",
+      "workspace": "5965cbe7-b1f4-4c64-b397-5c78de66d1fc"
+    }
+  ],
+  "pages": [
+    {
+      "name": "Obraz sytuacji",
+      "id": "feb4db5b-2445-2a98-51b3-c60dd0340356"
+    },
+    {
+      "name": "Gotowosc dzialow",
+      "id": "8c45d12f-2caa-0727-194f-3b6a81b63b2d"
+    },
+    {
+      "name": "Siatka i moduly",
+      "id": "7fc55d8c-031a-e6a3-73f2-9b4f5f81f97b"
+    },
+    {
+      "name": "Procedury SPO",
+      "id": "2b3e4eff-77b8-8053-c97b-493c59bbea62"
+    },
+    {
+      "name": "Matryca ryzyka",
+      "id": "854993c4-b245-5b12-5f35-937512dbe482"
+    }
+  ],
+  "queries": [
+    {
+      "dataSource": {
+        "kind": "inline",
+        "dataSourceId": "5532c541-9928-14a9-994c-01625ee03d53"
+      },
+      "text": "let akt = TaskActivation | where timestamp between (_startTime .. _endTime)\n    | summarize arg_max(timestamp, activation_status) by task_module_id;\nlet dekl = ReadinessDeclaration | where timestamp between (_startTime .. _endTime)\n    | summarize arg_max(timestamp, status) by admin_division, task_module_id;\nlet plan = SafetyGrid | where hazard_code == 'Z02' and phase == 'R'\n    | where role != 'wspierający' and isnotempty(task_modules)\n    | mv-expand modul = split(task_modules, ';') to typeof(string)\n    | where isnotempty(modul)\n    | extend task_module_id = toint(modul);\nunion\n  (akt  | summarize Wskaznik = 'Moduly uruchomione', Wartosc = countif(activation_status in ('aktywny', 'wygaszanie'))),\n  (akt  | summarize Wskaznik = 'W tym w wygaszaniu', Wartosc = countif(activation_status == 'wygaszanie')),\n  (dekl | summarize Wskaznik = 'Deklaracje gotowosci', Wartosc = count()),\n  (dekl | summarize Wskaznik = 'W tym domkniete', Wartosc = countif(status == 'gotowe')),\n  (dekl | summarize Wskaznik = 'W tym zablokowane', Wartosc = countif(status == 'zablokowane')),\n  (dekl | summarize Wskaznik = 'Dzialy, ktore odpowiedzialy', Wartosc = dcount(admin_division)),\n  (plan | summarize Wskaznik = 'Zadania w planie Z02/R', Wartosc = count()),\n  (plan | summarize Wskaznik = 'Dzialy objete planem', Wartosc = dcount(admin_division))",
+      "id": "302e2845-808a-5d40-538e-e38bcd54d11a",
+      "usedVariables": [
+        "_startTime",
+        "_endTime"
+      ]
+    },
+    {
+      "dataSource": {
+        "kind": "inline",
+        "dataSourceId": "5532c541-9928-14a9-994c-01625ee03d53"
+      },
+      "text": "ReadinessDeclaration\n| where timestamp between (_startTime .. _endTime)\n| summarize Deklaracje = count() by bin(timestamp, 2h), status\n| order by timestamp asc",
+      "id": "eed60eb8-2954-3c1d-d93b-45861a09aeb1",
+      "usedVariables": [
+        "_startTime",
+        "_endTime"
+      ]
+    },
+    {
+      "dataSource": {
+        "kind": "inline",
+        "dataSourceId": "5532c541-9928-14a9-994c-01625ee03d53"
+      },
+      "text": "ReadinessDeclaration\n| where timestamp between (_startTime .. _endTime)\n| summarize arg_max(timestamp, status) by admin_division, task_module_id\n| summarize Deklaracje = count() by status\n| order by Deklaracje desc",
+      "id": "f36ed26a-6a56-65e6-c502-2d69d2492643",
+      "usedVariables": [
+        "_startTime",
+        "_endTime"
+      ]
+    },
+    {
+      "dataSource": {
+        "kind": "inline",
+        "dataSourceId": "5532c541-9928-14a9-994c-01625ee03d53"
+      },
+      "text": "TaskActivation\n| where timestamp between (_startTime .. _endTime)\n| summarize arg_max(timestamp, day_offset, activation_status, leading_admin_division, trigger_reason) by task_module_id\n| lookup kind=leftouter (dim_task_module | project task_module_id, task_module_name) on task_module_id\n| lookup kind=leftouter (dim_admin_division | project leading_admin_division = admin_division, Lider = admin_name) on leading_admin_division\n| project Modul = task_module_name, Dzien = strcat('D+', day_offset), Status = activation_status,\n          Lider, Przyczyna = trigger_reason, Aktywowano = timestamp\n| order by Aktywowano asc",
+      "id": "8e5b85d8-a386-90b9-1674-dd62a8958b70",
+      "usedVariables": [
+        "_startTime",
+        "_endTime"
+      ]
+    },
+    {
+      "dataSource": {
+        "kind": "inline",
+        "dataSourceId": "5532c541-9928-14a9-994c-01625ee03d53"
+      },
+      "text": "TaskActivation\n| where timestamp between (_startTime .. _endTime)\n| lookup kind=leftouter (dim_task_module | project task_module_id, task_module_name) on task_module_id\n| summarize Zdarzenia = count() by bin(timestamp, 4h), task_module_name\n| order by timestamp asc",
+      "id": "887f556b-e5c2-40e1-613c-13303e780708",
+      "usedVariables": [
+        "_startTime",
+        "_endTime"
+      ]
+    },
+    {
+      "dataSource": {
+        "kind": "inline",
+        "dataSourceId": "5532c541-9928-14a9-994c-01625ee03d53"
+      },
+      "text": "let dekl = ReadinessDeclaration | where timestamp between (_startTime .. _endTime)\n    | summarize arg_max(timestamp, status) by admin_division, task_module_id;\nSafetyGrid\n| where hazard_code == 'Z02' and phase == 'R'\n| where role != 'wspierający' and isnotempty(task_modules)\n| mv-expand modul = split(task_modules, ';') to typeof(string)\n| where isnotempty(modul)\n| extend task_module_id = toint(modul)\n| join kind=leftouter dekl on admin_division, task_module_id\n| extend status = coalesce(status, 'brak deklaracji')\n| summarize Zadania = count() by status\n| order by Zadania desc",
+      "id": "9a401752-cfed-591a-7338-5552da962760",
+      "usedVariables": [
+        "_startTime",
+        "_endTime"
+      ]
+    },
+    {
+      "dataSource": {
+        "kind": "inline",
+        "dataSourceId": "5532c541-9928-14a9-994c-01625ee03d53"
+      },
+      "text": "let dekl = ReadinessDeclaration | where timestamp between (_startTime .. _endTime)\n    | summarize arg_max(timestamp, status) by admin_division, task_module_id;\nSafetyGrid\n| where hazard_code == 'Z02' and phase == 'R'\n| where role != 'wspierający' and isnotempty(task_modules)\n| mv-expand modul = split(task_modules, ';') to typeof(string)\n| where isnotempty(modul)\n| extend task_module_id = toint(modul)\n| join kind=leftouter dekl on admin_division, task_module_id\n| where isempty(status)\n| lookup kind=leftouter (dim_admin_division | project admin_division, admin_name, ministry) on admin_division\n| summarize Brakujace = count(), Wiodace = countif(role == 'wiodący' or role == 'wiodacy') by Dzial = admin_name, Resort = ministry\n| order by Wiodace desc, Brakujace desc\n| take 25",
+      "id": "8beb7b2b-84b2-c32f-c307-174c55aab185",
+      "usedVariables": [
+        "_startTime",
+        "_endTime"
+      ]
+    },
+    {
+      "dataSource": {
+        "kind": "inline",
+        "dataSourceId": "5532c541-9928-14a9-994c-01625ee03d53"
+      },
+      "text": "ReadinessDeclaration\n| where timestamp between (_startTime .. _endTime)\n| summarize arg_max(timestamp, status, comment, forces_and_assets) by admin_division, task_module_id\n| where status == 'zablokowane'\n| lookup kind=leftouter (dim_admin_division | project admin_division, admin_name) on admin_division\n| lookup kind=leftouter (dim_task_module | project task_module_id, task_module_name) on task_module_id\n| project Dzial = admin_name, Modul = task_module_name, Powod = comment, Sily = forces_and_assets, Zgloszono = timestamp\n| order by Zgloszono desc",
+      "id": "033b3bdd-f1d4-ae0c-8e10-3aa09cb25223",
+      "usedVariables": [
+        "_startTime",
+        "_endTime"
+      ]
+    },
+    {
+      "dataSource": {
+        "kind": "inline",
+        "dataSourceId": "5532c541-9928-14a9-994c-01625ee03d53"
+      },
+      "text": "ActivationPlanZ02R()\n| summarize Zadania = count(), Wiodace = countif(role == 'wiodący' or role == 'wiodacy') by Dzial = admin_name\n| where Zadania > 0\n| order by Wiodace desc, Zadania desc\n| take 20",
+      "id": "e8935c7a-619a-0608-0d03-85cf9c8c0081",
+      "usedVariables": []
+    },
+    {
+      "dataSource": {
+        "kind": "inline",
+        "dataSourceId": "5532c541-9928-14a9-994c-01625ee03d53"
+      },
+      "text": "CurrentReadiness()\n| project Dzial = admin_name, Modul = task_module_name, Status = status, Zgloszono = timestamp, Uwagi = comment\n| order by Dzial asc, Modul asc",
+      "id": "b4adad82-ad07-8abc-5388-2cab15a4797b",
+      "usedVariables": []
+    },
+    {
+      "dataSource": {
+        "kind": "inline",
+        "dataSourceId": "5532c541-9928-14a9-994c-01625ee03d53"
+      },
+      "text": "ReadinessGap()\n| lookup kind=leftouter (dim_admin_division | project admin_division, ministry_x = ministry) on admin_division\n| summarize Zadania = count() by Resort = coalesce(ministry, ministry_x), status\n| order by Zadania desc",
+      "id": "279af0d8-0a57-8acc-21f8-44547d26f78d",
+      "usedVariables": []
+    },
+    {
+      "dataSource": {
+        "kind": "inline",
+        "dataSourceId": "5532c541-9928-14a9-994c-01625ee03d53"
+      },
+      "text": "CriticalPathBlockers()\n| project Dzial = admin_name, Resort = ministry, Modul = task_module_name,\n          Powod = comment, Sily = forces_and_assets, Zgloszono = timestamp\n| order by Zgloszono desc",
+      "id": "bac36a63-32a1-6216-75a3-da010430f256",
+      "usedVariables": []
+    },
+    {
+      "dataSource": {
+        "kind": "inline",
+        "dataSourceId": "5532c541-9928-14a9-994c-01625ee03d53"
+      },
+      "text": "CurrentReadiness()\n| where status in ('gotowe', 'w toku')\n| project Dzial = admin_name, Modul = task_module_name, Status = status, Sily = forces_and_assets\n| order by Dzial asc",
+      "id": "bdbfc450-7fa4-babf-d056-a589abdf2e23",
+      "usedVariables": []
+    },
+    {
+      "dataSource": {
+        "kind": "inline",
+        "dataSourceId": "5532c541-9928-14a9-994c-01625ee03d53"
+      },
+      "text": "ActivationPlanZ02R()\n| project Dzial = admin_name, Resort = ministry, Modul = task_module_name, Rola = role, Krytycznosc = criticality\n| order by Rola asc, Dzial asc",
+      "id": "955d885e-27f0-1092-283e-5b78081521a8",
+      "usedVariables": []
+    },
+    {
+      "dataSource": {
+        "kind": "inline",
+        "dataSourceId": "5532c541-9928-14a9-994c-01625ee03d53"
+      },
+      "text": "SafetyGrid\n| where hazard_code == 'Z02'\n| summarize Wpisy = count() by Rola = role, Krytycznosc = criticality\n| order by Wpisy desc",
+      "id": "adb2dadf-ad45-0d15-b566-3496584ab6b7",
+      "usedVariables": []
+    },
+    {
+      "dataSource": {
+        "kind": "inline",
+        "dataSourceId": "5532c541-9928-14a9-994c-01625ee03d53"
+      },
+      "text": "ActivationPlanZ02R()\n| summarize Dzialy = dcount(admin_division), Wiodace = countif(role == 'wiodący' or role == 'wiodacy') by Modul = task_module_name\n| order by Dzialy desc",
+      "id": "abde8c5f-0c33-404f-4214-da2db13200fe",
+      "usedVariables": []
+    },
+    {
+      "dataSource": {
+        "kind": "inline",
+        "dataSourceId": "5532c541-9928-14a9-994c-01625ee03d53"
+      },
+      "text": "Interdependency\n| lookup kind=leftouter (dim_task_module | project task_module_id, Modul = task_module_name) on task_module_id\n| lookup kind=leftouter (dim_task_module | project depends_on_task_module_id = task_module_id, Zalezy_od = task_module_name) on depends_on_task_module_id\n| project Modul, Zalezy_od, Uzasadnienie = dependency_reason",
+      "id": "25e11a92-b499-9a52-c08c-5f5812e451d2",
+      "usedVariables": []
+    },
+    {
+      "dataSource": {
+        "kind": "inline",
+        "dataSourceId": "5532c541-9928-14a9-994c-01625ee03d53"
+      },
+      "text": "SafetyGrid\n| summarize Wpisy = count(), Dzialy = dcount(admin_division) by Zagrozenie = hazard_code, Faza = phase\n| order by Zagrozenie asc, Faza asc",
+      "id": "10505c49-39bc-5e7d-d3b1-60d2981a9939",
+      "usedVariables": []
+    },
+    {
+      "dataSource": {
+        "kind": "inline",
+        "dataSourceId": "5532c541-9928-14a9-994c-01625ee03d53"
+      },
+      "text": "SpoStepsForFlood()\n| project Procedura = spo_name, Krok = step_number, Opis = step_description,\n          Dzial = admin_name, SLA_h = sla_hours, Dokument = required_document",
+      "id": "10240ecf-511e-2863-d2f1-fb857513c2ad",
+      "usedVariables": []
+    },
+    {
+      "dataSource": {
+        "kind": "inline",
+        "dataSourceId": "5532c541-9928-14a9-994c-01625ee03d53"
+      },
+      "text": "SpoStepsForFlood()\n| summarize Krokow = count(), Min_SLA_h = min(sla_hours), Sredni_SLA_h = round(avg(sla_hours), 1) by Dzial = admin_name\n| order by Min_SLA_h asc\n| take 20",
+      "id": "97ff455d-11ae-0e94-cb23-a62a8e3a43e5",
+      "usedVariables": []
+    },
+    {
+      "dataSource": {
+        "kind": "inline",
+        "dataSourceId": "5532c541-9928-14a9-994c-01625ee03d53"
+      },
+      "text": "dim_contact_point\n| lookup kind=leftouter (dim_admin_division | project admin_division, admin_name, ministry) on admin_division\n| project Dzial = admin_name, Resort = ministry, Rola = role, Komorka = unit,\n          Telefon = duty_phone, Email = email, Zastepca = deputy\n| order by Dzial asc",
+      "id": "47b55550-509f-7c80-2262-9bbd655c3295",
+      "usedVariables": []
+    },
+    {
+      "dataSource": {
+        "kind": "inline",
+        "dataSourceId": "5532c541-9928-14a9-994c-01625ee03d53"
+      },
+      "text": "dim_hazard\n| project Zagrozenie = hazard_name, Kod = hazard_code, Kategoria = category,\n          Prawdopodobienstwo = probability, Skutki = impact, Ryzyko = risk_score, Poziom = risk_level\n| order by Ryzyko desc",
+      "id": "dfca233e-cb6a-f5c0-520d-8ba2386e31ec",
+      "usedVariables": []
+    },
+    {
+      "dataSource": {
+        "kind": "inline",
+        "dataSourceId": "5532c541-9928-14a9-994c-01625ee03d53"
+      },
+      "text": "dim_hazard\n| summarize Zagrozenia = count(), Max_ryzyko = max(risk_score) by Kategoria = category\n| order by Max_ryzyko desc",
+      "id": "625ee750-54ba-577e-2999-35762194fe6b",
+      "usedVariables": []
+    },
+    {
+      "dataSource": {
+        "kind": "inline",
+        "dataSourceId": "5532c541-9928-14a9-994c-01625ee03d53"
+      },
+      "text": "dim_hazard\n| project Zagrozenie = hazard_name, Ryzyko = risk_score, Poziom = risk_level\n| order by Ryzyko desc\n| take 10",
+      "id": "616a5fd2-c42f-5a1f-bf42-dcd0943d7734",
+      "usedVariables": []
+    }
+  ]
+}

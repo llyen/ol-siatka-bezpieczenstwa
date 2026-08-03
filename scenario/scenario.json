@@ -1,0 +1,17 @@
+{
+  "cluster": "https://trd-j90bphmup0kwg093yy.z3.kusto.fabric.microsoft.com",
+  "database": "OL_SIA_Eventhouse",
+  "workspaceId": "5965cbe7-b1f4-4c64-b397-5c78de66d1fc",
+  "lakehouseId": "56ca1277-c81f-4a76-9413-5e3fb880dea7",
+  "onelake": "https://onelake.dfs.fabric.microsoft.com/5965cbe7-b1f4-4c64-b397-5c78de66d1fc/56ca1277-c81f-4a76-9413-5e3fb880dea7/Files/streams",
+  "timeColumn": "timestamp",
+  "liveStart": "2026-09-15T00:00:00+02:00",
+  "streams": [
+    "TaskActivation",
+    "ReadinessDeclaration"
+  ],
+  "files": {
+    "TaskActivation": "fact_task_activation",
+    "ReadinessDeclaration": "fact_readiness_declaration"
+  }
+}

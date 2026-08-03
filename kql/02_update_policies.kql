@@ -1,0 +1,68 @@
+// 02_update_policies.kql - funkcje curated Eventhouse dla scenariusza siatki bezpieczenstwa.
+//
+// Funkcje sa wspolna warstwa dla kafelkow dashboardu, regul Activatora i Data Agenta:
+// jedno miejsce definiuje, co znaczy "aktywny modul", "brak deklaracji" i "po SLA".
+// Dzieki temu alert i kafelek nigdy nie licza tego samego inaczej.
+//
+// UWAGA: funkcje odwoluja sie do rejestrow (dim_*, SafetyGrid, SpoChecklist),
+// ktore powstaja dopiero w kroku 'ingest'. Przy pierwszym przebiegu kroku 'kql'
+// czesc z nich zwroci blad 400 - dlatego deploy_fabric.ps1 wykonuje krok 'kql'
+// ponownie po zaladowaniu rejestrow.
+//
+// KQL nie pozwala odwolac sie w `extend` do kolumny tworzonej w tym samym kroku,
+// dlatego wyliczenia sa rozbite na kolejne `extend`, nawet gdy wyglada to rozwlekle.
+
+.create-or-alter function with (folder='Curated', docstring='Biezacy stan aktywacji kazdego modulu zadaniowego. Zwraca ostatni znany status, wiec modul wygaszony nie liczy sie juz jako aktywny.') CurrentModuleActivation() {
+    TaskActivation
+    | summarize arg_max(timestamp, day_offset, hazard_code, phase, leading_admin_division, activation_status, trigger_reason) by task_module_id
+    | lookup kind=leftouter (dim_task_module | project task_module_id, task_module_name, description) on task_module_id
+}
+
+.create-or-alter function with (folder='Curated', docstring='Biezacy stan deklaracji gotowosci per dzial i modul. Deklaracja jest zdarzeniem, wiec liczy sie ostatnia, a nie pierwsza.') CurrentReadiness() {
+    ReadinessDeclaration
+    | summarize arg_max(timestamp, status, comment, forces_and_assets) by admin_division, task_module_id
+    | lookup kind=leftouter (dim_admin_division | project admin_division, admin_name, ministry) on admin_division
+    | lookup kind=leftouter (dim_task_module | project task_module_id, task_module_name) on task_module_id
+}
+
+.create-or-alter function with (folder='Curated', docstring='Plan zadan dla zagrozenia Z02 w fazie R. Odpowiednik activation_plan z notatnika 02_activation_engine: 44 zadania w 5 modulach. Dwa filtry sa istotne merytorycznie - dzialy o roli wspierajacej nie generuja zadan operacyjnych, a pusta lista modulow oznacza deklaracje obecnosci bez konkretnego zadania.') ActivationPlanZ02R() {
+    SafetyGrid
+    | where hazard_code == 'Z02' and phase == 'R'
+    | where role != 'wspierający' and role != 'wspierajacy'
+    | where isnotempty(task_modules)
+    | mv-expand modul = split(task_modules, ';') to typeof(string)
+    | where isnotempty(modul)
+    | extend task_module_id = toint(modul)
+    | lookup kind=leftouter (dim_admin_division | project admin_division, admin_name, ministry) on admin_division
+    | lookup kind=leftouter (dim_task_module | project task_module_id, task_module_name) on task_module_id
+    | project hazard_code, phase, admin_division, admin_name, ministry, task_module_id, task_module_name, role, criticality
+}
+
+.create-or-alter function with (folder='Curated', docstring='Zadania z planu, dla ktorych nie ma deklaracji gotowosci albo deklaracja nie jest domknieta. To material na przypomnienie do dyzurnego, nie na raport koncowy.') ReadinessGap() {
+    ActivationPlanZ02R()
+    | join kind=leftouter (CurrentReadiness() | project admin_division, task_module_id, status, comment, declared_at = timestamp) on admin_division, task_module_id
+    | extend status = coalesce(status, 'brak deklaracji')
+    | where status != 'gotowe'
+    | extend severity_rank = case(status == 'zablokowane', 1, status == 'brak deklaracji', 2, status == 'nie rozpoczeto', 3, 4)
+}
+
+.create-or-alter function with (folder='Curated', docstring='Obciazenie dzialow rola wiodaca w planie. Prog 4 zadan wiodacych pochodzi z activator/RULES.md.') DivisionLoad() {
+    ActivationPlanZ02R()
+    | summarize zadania = count(), wiodace = countif(role == 'wiodacy' or role == 'wiodący'), moduly = make_set(task_module_id) by admin_division, admin_name
+    | extend przeciazony = wiodace >= 4
+    | order by wiodace desc, zadania desc
+}
+
+.create-or-alter function with (folder='Curated', docstring='Blokady na sciezce krytycznej. Sciezka krytyczna scenariusza powodziowego to moduly 1, 2, 3 i 4 - rozpoznanie, dystrybucja pomocy, ewakuacja i zabezpieczenie infrastruktury.') CriticalPathBlockers() {
+    CurrentReadiness()
+    | where status == 'zablokowane' and task_module_id in (1, 2, 3, 4)
+}
+
+.create-or-alter function with (folder='Curated', docstring='Kroki SPO powiazane z zagrozeniem Z02 wraz z dzialem odpowiedzialnym i SLA. Sluzy do zamiany procedury w liste zadan z terminami.') SpoStepsForFlood() {
+    dim_spo
+    | where related_hazards has 'Z02'
+    | join kind=inner SpoChecklist on spo_code
+    | lookup kind=leftouter (dim_admin_division | project admin_division, admin_name) on $left.responsible_admin_division == $right.admin_division
+    | project spo_code, spo_name, step_number, step_description, responsible_admin_division, admin_name, sla_hours, required_document
+    | order by spo_code asc, step_number asc
+}

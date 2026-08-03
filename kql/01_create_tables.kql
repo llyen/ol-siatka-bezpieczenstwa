@@ -1,0 +1,65 @@
+// 01_create_tables.kql - tabele strumieniowe i mapowania Eventhouse dla scenariusza
+// "Siatka bezpieczenstwa - pulpit koordynacji".
+//
+// Scenariusz ma tylko dwa strumienie (deklaracje gotowosci i aktywacje modulow),
+// za to bardzo bogata warstwe rejestrowa. Rejestry (siatka, SPO, kontakty) laduje
+// deploy_fabric.ps1 w kroku 'ingest' bezposrednio z CSV, bo maja staly schemat
+// i nie potrzebuja mapowan JSON.
+//
+// Polityka retencji musi byc zapisana jako JSON. Skladnia
+// `policy retention softdelete = 30d recoverability = enabled` zwraca w Fabric
+// Eventhouse HTTP 400 - to nie jest to samo co w Azure Data Explorer.
+
+.create-merge table ReadinessDeclaration (
+    timestamp: datetime,
+    event_id: string,
+    admin_division: string,
+    task_module_id: int,
+    status: string,
+    comment: string,
+    forces_and_assets: string
+)
+
+.create-or-alter table ReadinessDeclaration ingestion json mapping 'readiness_declaration_mapping'
+'['
+'{"column":"timestamp","Properties":{"Path":"$.timestamp"}},'
+'{"column":"event_id","Properties":{"Path":"$.event_id"}},'
+'{"column":"admin_division","Properties":{"Path":"$.admin_division"}},'
+'{"column":"task_module_id","Properties":{"Path":"$.task_module_id"}},'
+'{"column":"status","Properties":{"Path":"$.status"}},'
+'{"column":"comment","Properties":{"Path":"$.comment"}},'
+'{"column":"forces_and_assets","Properties":{"Path":"$.forces_and_assets"}}'
+']'
+
+.alter table ReadinessDeclaration policy retention "{\"SoftDeletePeriod\":\"30.00:00:00\",\"Recoverability\":\"Enabled\"}"
+
+.alter table ReadinessDeclaration policy caching hot = 7d
+
+.create-merge table TaskActivation (
+    timestamp: datetime,
+    event_id: string,
+    day_offset: int,
+    hazard_code: string,
+    phase: string,
+    task_module_id: int,
+    leading_admin_division: string,
+    activation_status: string,
+    trigger_reason: string
+)
+
+.create-or-alter table TaskActivation ingestion json mapping 'task_activation_mapping'
+'['
+'{"column":"timestamp","Properties":{"Path":"$.timestamp"}},'
+'{"column":"event_id","Properties":{"Path":"$.event_id"}},'
+'{"column":"day_offset","Properties":{"Path":"$.day_offset"}},'
+'{"column":"hazard_code","Properties":{"Path":"$.hazard_code"}},'
+'{"column":"phase","Properties":{"Path":"$.phase"}},'
+'{"column":"task_module_id","Properties":{"Path":"$.task_module_id"}},'
+'{"column":"leading_admin_division","Properties":{"Path":"$.leading_admin_division"}},'
+'{"column":"activation_status","Properties":{"Path":"$.activation_status"}},'
+'{"column":"trigger_reason","Properties":{"Path":"$.trigger"}}'
+']'
+
+.alter table TaskActivation policy retention "{\"SoftDeletePeriod\":\"30.00:00:00\",\"Recoverability\":\"Enabled\"}"
+
+.alter table TaskActivation policy caching hot = 7d

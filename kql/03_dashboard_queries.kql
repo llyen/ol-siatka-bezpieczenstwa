@@ -1,0 +1,192 @@
+// 03_dashboard_queries.kql - kafelki Real-Time Dashboard scenariusza „Siatka bezpieczenstwa".
+//
+// Format naglowka jest kontraktem dla deploy\create_dashboard.ps1: numer, tytul i strona.
+// Zmienne _startTime i _endTime pochodza z parametru zakresu czasu dashboardu.
+//
+// Ten scenariusz ma inna proporcje niz pozostale: strumien to zaledwie ~185 zdarzen
+// rozlozonych na 11 dni, a rejestry (siatka, SPO, matryca ryzyka, kontakty) licza
+// tysiace wierszy i nie zmieniaja sie w czasie. Dlatego tylko kafelki 01-08 sa
+// filtrowane oknem czasu; reszta pokazuje stan referencyjny niezaleznie od okna.
+// Gdyby rejestry filtrowac czasem, dashboard bylby pusty przez wiekszosc cyklu.
+
+// 01. Kafelek: „Puls koordynacji” | Strona: Obraz sytuacji
+let akt = TaskActivation | where timestamp between (_startTime .. _endTime)
+    | summarize arg_max(timestamp, activation_status) by task_module_id;
+let dekl = ReadinessDeclaration | where timestamp between (_startTime .. _endTime)
+    | summarize arg_max(timestamp, status) by admin_division, task_module_id;
+let plan = SafetyGrid | where hazard_code == 'Z02' and phase == 'R'
+    | where role != 'wspierający' and isnotempty(task_modules)
+    | mv-expand modul = split(task_modules, ';') to typeof(string)
+    | where isnotempty(modul)
+    | extend task_module_id = toint(modul);
+union
+  (akt  | summarize Wskaznik = 'Moduly uruchomione', Wartosc = countif(activation_status in ('aktywny', 'wygaszanie'))),
+  (akt  | summarize Wskaznik = 'W tym w wygaszaniu', Wartosc = countif(activation_status == 'wygaszanie')),
+  (dekl | summarize Wskaznik = 'Deklaracje gotowosci', Wartosc = count()),
+  (dekl | summarize Wskaznik = 'W tym domkniete', Wartosc = countif(status == 'gotowe')),
+  (dekl | summarize Wskaznik = 'W tym zablokowane', Wartosc = countif(status == 'zablokowane')),
+  (dekl | summarize Wskaznik = 'Dzialy, ktore odpowiedzialy', Wartosc = dcount(admin_division)),
+  (plan | summarize Wskaznik = 'Zadania w planie Z02/R', Wartosc = count()),
+  (plan | summarize Wskaznik = 'Dzialy objete planem', Wartosc = dcount(admin_division))
+
+// 02. Kafelek: „Naplyw deklaracji gotowosci” | Strona: Obraz sytuacji
+ReadinessDeclaration
+| where timestamp between (_startTime .. _endTime)
+| summarize Deklaracje = count() by bin(timestamp, 2h), status
+| order by timestamp asc
+
+// 03. Kafelek: „Struktura odpowiedzi dzialow” | Strona: Obraz sytuacji
+ReadinessDeclaration
+| where timestamp between (_startTime .. _endTime)
+| summarize arg_max(timestamp, status) by admin_division, task_module_id
+| summarize Deklaracje = count() by status
+| order by Deklaracje desc
+
+// 04. Kafelek: „Aktywacja modulow zadaniowych” | Strona: Obraz sytuacji
+TaskActivation
+| where timestamp between (_startTime .. _endTime)
+| summarize arg_max(timestamp, day_offset, activation_status, leading_admin_division, trigger_reason) by task_module_id
+| lookup kind=leftouter (dim_task_module | project task_module_id, task_module_name) on task_module_id
+| lookup kind=leftouter (dim_admin_division | project leading_admin_division = admin_division, Lider = admin_name) on leading_admin_division
+| project Modul = task_module_name, Dzien = strcat('D+', day_offset), Status = activation_status,
+          Lider, Przyczyna = trigger_reason, Aktywowano = timestamp
+| order by Aktywowano asc
+
+// 05. Kafelek: „Kalendarz uruchamiania modulow” | Strona: Obraz sytuacji
+TaskActivation
+| where timestamp between (_startTime .. _endTime)
+| lookup kind=leftouter (dim_task_module | project task_module_id, task_module_name) on task_module_id
+| summarize Zdarzenia = count() by bin(timestamp, 4h), task_module_name
+| order by timestamp asc
+
+// 06. Kafelek: „Luka gotowosci - stan biezacy” | Strona: Obraz sytuacji
+let dekl = ReadinessDeclaration | where timestamp between (_startTime .. _endTime)
+    | summarize arg_max(timestamp, status) by admin_division, task_module_id;
+SafetyGrid
+| where hazard_code == 'Z02' and phase == 'R'
+| where role != 'wspierający' and isnotempty(task_modules)
+| mv-expand modul = split(task_modules, ';') to typeof(string)
+| where isnotempty(modul)
+| extend task_module_id = toint(modul)
+| join kind=leftouter dekl on admin_division, task_module_id
+| extend status = coalesce(status, 'brak deklaracji')
+| summarize Zadania = count() by status
+| order by Zadania desc
+
+// 07. Kafelek: „Kto jeszcze nie odpowiedzial” | Strona: Obraz sytuacji
+let dekl = ReadinessDeclaration | where timestamp between (_startTime .. _endTime)
+    | summarize arg_max(timestamp, status) by admin_division, task_module_id;
+SafetyGrid
+| where hazard_code == 'Z02' and phase == 'R'
+| where role != 'wspierający' and isnotempty(task_modules)
+| mv-expand modul = split(task_modules, ';') to typeof(string)
+| where isnotempty(modul)
+| extend task_module_id = toint(modul)
+| join kind=leftouter dekl on admin_division, task_module_id
+| where isempty(status)
+| lookup kind=leftouter (dim_admin_division | project admin_division, admin_name, ministry) on admin_division
+| summarize Brakujace = count(), Wiodace = countif(role == 'wiodący' or role == 'wiodacy') by Dzial = admin_name, Resort = ministry
+| order by Wiodace desc, Brakujace desc
+| take 25
+
+// 08. Kafelek: „Blokady zgloszone przez dzialy” | Strona: Obraz sytuacji
+ReadinessDeclaration
+| where timestamp between (_startTime .. _endTime)
+| summarize arg_max(timestamp, status, comment, forces_and_assets) by admin_division, task_module_id
+| where status == 'zablokowane'
+| lookup kind=leftouter (dim_admin_division | project admin_division, admin_name) on admin_division
+| lookup kind=leftouter (dim_task_module | project task_module_id, task_module_name) on task_module_id
+| project Dzial = admin_name, Modul = task_module_name, Powod = comment, Sily = forces_and_assets, Zgloszono = timestamp
+| order by Zgloszono desc
+
+// 09. Kafelek: „Obciazenie dzialow rola wiodaca” | Strona: Gotowosc dzialow
+ActivationPlanZ02R()
+| summarize Zadania = count(), Wiodace = countif(role == 'wiodący' or role == 'wiodacy') by Dzial = admin_name
+| where Zadania > 0
+| order by Wiodace desc, Zadania desc
+| take 20
+
+// 10. Kafelek: „Macierz gotowosci: dzial x modul” | Strona: Gotowosc dzialow
+CurrentReadiness()
+| project Dzial = admin_name, Modul = task_module_name, Status = status, Zgloszono = timestamp, Uwagi = comment
+| order by Dzial asc, Modul asc
+
+// 11. Kafelek: „Braki i blokady wg resortu” | Strona: Gotowosc dzialow
+ReadinessGap()
+| lookup kind=leftouter (dim_admin_division | project admin_division, ministry_x = ministry) on admin_division
+| summarize Zadania = count() by Resort = coalesce(ministry, ministry_x), status
+| order by Zadania desc
+
+// 12. Kafelek: „Blokady na sciezce krytycznej” | Strona: Gotowosc dzialow
+CriticalPathBlockers()
+| project Dzial = admin_name, Resort = ministry, Modul = task_module_name,
+          Powod = comment, Sily = forces_and_assets, Zgloszono = timestamp
+| order by Zgloszono desc
+
+// 13. Kafelek: „Sily i srodki zadeklarowane” | Strona: Gotowosc dzialow
+CurrentReadiness()
+| where status in ('gotowe', 'w toku')
+| project Dzial = admin_name, Modul = task_module_name, Status = status, Sily = forces_and_assets
+| order by Dzial asc
+
+// 14. Kafelek: „Siatka bezpieczenstwa: powodz, faza reagowania” | Strona: Siatka i moduly
+ActivationPlanZ02R()
+| project Dzial = admin_name, Resort = ministry, Modul = task_module_name, Rola = role, Krytycznosc = criticality
+| order by Rola asc, Dzial asc
+
+// 15. Kafelek: „Podzial rol w siatce” | Strona: Siatka i moduly
+SafetyGrid
+| where hazard_code == 'Z02'
+| summarize Wpisy = count() by Rola = role, Krytycznosc = criticality
+| order by Wpisy desc
+
+// 16. Kafelek: „Moduly wg liczby zaangazowanych dzialow” | Strona: Siatka i moduly
+ActivationPlanZ02R()
+| summarize Dzialy = dcount(admin_division), Wiodace = countif(role == 'wiodący' or role == 'wiodacy') by Modul = task_module_name
+| order by Dzialy desc
+
+// 17. Kafelek: „Wspolzaleznosci modulow zadaniowych” | Strona: Siatka i moduly
+Interdependency
+| lookup kind=leftouter (dim_task_module | project task_module_id, Modul = task_module_name) on task_module_id
+| lookup kind=leftouter (dim_task_module | project depends_on_task_module_id = task_module_id, Zalezy_od = task_module_name) on depends_on_task_module_id
+| project Modul, Zalezy_od, Uzasadnienie = dependency_reason
+
+// 18. Kafelek: „Pokrycie siatki wg faz zarzadzania kryzysowego” | Strona: Siatka i moduly
+SafetyGrid
+| summarize Wpisy = count(), Dzialy = dcount(admin_division) by Zagrozenie = hazard_code, Faza = phase
+| order by Zagrozenie asc, Faza asc
+
+// 19. Kafelek: „Procedura SPO dla zagrozenia powodziowego” | Strona: Procedury SPO
+SpoStepsForFlood()
+| project Procedura = spo_name, Krok = step_number, Opis = step_description,
+          Dzial = admin_name, SLA_h = sla_hours, Dokument = required_document
+
+// 20. Kafelek: „Najkrotsze SLA w procedurach powodziowych” | Strona: Procedury SPO
+SpoStepsForFlood()
+| summarize Krokow = count(), Min_SLA_h = min(sla_hours), Sredni_SLA_h = round(avg(sla_hours), 1) by Dzial = admin_name
+| order by Min_SLA_h asc
+| take 20
+
+// 21. Kafelek: „Punkty kontaktowe sluzby dyzurnej” | Strona: Procedury SPO
+dim_contact_point
+| lookup kind=leftouter (dim_admin_division | project admin_division, admin_name, ministry) on admin_division
+| project Dzial = admin_name, Resort = ministry, Rola = role, Komorka = unit,
+          Telefon = duty_phone, Email = email, Zastepca = deputy
+| order by Dzial asc
+
+// 22. Kafelek: „Matryca ryzyka: prawdopodobienstwo x skutki” | Strona: Matryca ryzyka
+dim_hazard
+| project Zagrozenie = hazard_name, Kod = hazard_code, Kategoria = category,
+          Prawdopodobienstwo = probability, Skutki = impact, Ryzyko = risk_score, Poziom = risk_level
+| order by Ryzyko desc
+
+// 23. Kafelek: „Zagrozenia wg kategorii” | Strona: Matryca ryzyka
+dim_hazard
+| summarize Zagrozenia = count(), Max_ryzyko = max(risk_score) by Kategoria = category
+| order by Max_ryzyko desc
+
+// 24. Kafelek: „Zagrozenia o najwyzszym ryzyku” | Strona: Matryca ryzyka
+dim_hazard
+| project Zagrozenie = hazard_name, Ryzyko = risk_score, Poziom = risk_level
+| order by Ryzyko desc
+| take 10

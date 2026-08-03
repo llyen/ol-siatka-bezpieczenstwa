@@ -3,3 +3,8 @@ __pycache__/
 *.pyc
 .venv/
 datasets/derived/*.tmp
+
+# Pliki robocze odtwarzania scenariusza (log, PID) - powstaja przy kazdym uruchomieniu
+scenario/_*.log
+scenario/_*.err.log
+scenario/_*.pid
