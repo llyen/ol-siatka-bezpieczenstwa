@@ -11,6 +11,8 @@ Workspace: `OL-ZK-Demo-Siatka` (`5965cbe7-b1f4-4c64-b397-5c78de66d1fc`)
 | `OL_SIA_Eventhouse` | Eventhouse / KQL DB | `a27ff4b5-c68b-4cf8-a4e2-4295a3e9b7ec` | wdrozony |
 | `OL_SIA_Dashboard` | Real-Time Dashboard | `f55f4c59-92f2-459e-b696-6c8a3af51feb` | 5 stron, 24 kafelki |
 | `OL_SIA_Activator` | Activator (Reflex) | `7da69e87-8620-46f1-857c-5d1fd0093a03` | 6 regul KQL |
+| `pulpit-koordynacji` | Fabric App (AppBackend) | `2b1ed178-f1f6-4be4-a784-664e941c0e2d` | 5 ekranow, wdrozony |
+| `pulpit-koordynacji` | SQL Database | `2fd3363a-6ff5-496b-bbda-036bfc87e54a` | 2 encje write-back |
 | Notatniki Spark | Notebook x7 | - | lancuch przechodzi |
 
 Cluster Eventhouse: `https://trd-j90bphmup0kwg093yy.z3.kusto.fabric.microsoft.com`
@@ -163,5 +165,22 @@ zwraca tylko „System cancelled the Spark session", pelny traceback widac wylac
 
 ## 9. Co zostalo
 
+- [x] Fabric App `pulpit-koordynacji` - wdrozona, opis w `fabric-app/pulpit-koordynacji/README.md`
 - [ ] Model semantyczny i raport Power BI - odlozone
 - [ ] Powiadomienia Activatora (e-mail / Teams) - do dokonczenia w UI
+- [ ] Powiadomienie o eskalacji z aplikacji - regula na tabeli `EscalationRequest`
+- [ ] Automatyczne odswiezanie `src/data/reference.json` (dzis recznie, `tools/export_reference.ps1`)
+
+## 10. Fabric App - warunki uruchomienia
+
+Dwa blokery pojawily sie przy pierwszym `rayfin up` i oba daja ten sam, mylacy komunikat
+`404 The provided workspace was not found`:
+
+1. **Rayfin CLI zalogowany w innym tenancie.** Workspace demo lezy w tenancie
+   `7ada8cf4-c4be-488f-a844-6d37ee64849e` (CRM262738), a domyslne logowanie szlo na tenant
+   Microsoft. Poprawka: `npx rayfin login -t 7ada8cf4-c4be-488f-a844-6d37ee64849e`.
+2. **Wstrzymana pojemnosc.** `fcdemo` w stanie `Paused` sprawia, ze workspace jest niewidoczny
+   dla API. Przed kazdym wdrozeniem uruchamiac `deploy\ensure_capacity.ps1`.
+
+Region ma znaczenie: Fabric App (preview) nie jest dostepny m.in. w `Poland Central`,
+`North Europe` i `UK South`. `West Europe`, gdzie stoi pojemnosc demo, jest wspierany.
