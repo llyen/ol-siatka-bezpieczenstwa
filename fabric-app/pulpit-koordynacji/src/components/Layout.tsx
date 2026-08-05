@@ -27,28 +27,33 @@ export function Layout() {
 
   return (
     <div className="min-h-screen bg-slate-100">
-      <header className="bg-[#0f2a52] text-white">
+      <div className="h-1 w-full bg-gov" />
+      <header className="border-b border-slate-200 bg-white text-slate-900">
         <div className="mx-auto flex max-w-[1600px] flex-wrap items-center justify-between gap-3 px-6 py-3">
           <div>
-            <div className="text-[11px] uppercase tracking-[0.2em] text-white/60">
+            <div className="text-[11px] uppercase tracking-[0.2em] text-slate-500">
               Rządowe Centrum Bezpieczeństwa · demonstracja na danych syntetycznych
             </div>
-            <h1 className="text-lg font-semibold">Siatka Bezpieczeństwa — Pulpit Koordynacji</h1>
+            <h1 className="text-lg font-semibold text-slate-900">
+              Siatka Bezpieczeństwa — Pulpit Koordynacji
+            </h1>
           </div>
           <div className="flex items-center gap-4 text-sm">
             <div className="text-right">
-              <div className="font-medium">{user?.name ?? user?.email ?? 'użytkownik'}</div>
-              <div className="text-xs text-white/60">{eventId}</div>
+              <div className="font-medium text-slate-900">
+                {user?.name ?? user?.email ?? 'użytkownik'}
+              </div>
+              <div className="text-xs text-slate-500">{eventId}</div>
             </div>
             <button
               onClick={() => void signOut()}
-              className="rounded px-3 py-1.5 text-sm ring-1 ring-inset ring-white/30 hover:bg-white/10"
+              className="rounded px-3 py-1.5 text-sm text-slate-700 ring-1 ring-inset ring-slate-300 hover:bg-slate-50"
             >
               Wyloguj
             </button>
           </div>
         </div>
-        <nav className="border-t border-white/15">
+        <nav className="border-t border-slate-200">
           <div className="mx-auto flex max-w-[1600px] gap-1 px-6">
             {NAV.map((item) => (
               <NavLink
@@ -57,8 +62,8 @@ export function Layout() {
                 className={({ isActive }) =>
                   `border-b-2 px-3 py-2 text-sm transition-colors ${
                     isActive
-                      ? 'border-white font-semibold text-white'
-                      : 'border-transparent text-white/70 hover:text-white'
+                      ? 'border-gov font-semibold text-gov'
+                      : 'border-transparent text-slate-500 hover:text-slate-900'
                   }`
                 }
               >

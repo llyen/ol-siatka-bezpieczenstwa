@@ -198,7 +198,7 @@ export function TasksPage() {
                     key={t.key}
                     onClick={() => openDivision(t.admin_division)}
                     className={`cursor-pointer border-b border-slate-100 hover:bg-blue-50 ${
-                      t.status === 'zablokowane' ? 'bg-red-50/60' : ''
+                      t.status === 'zablokowane' ? 'bg-red-50' : ''
                     }`}
                   >
                     <td className="px-2 py-2 font-semibold text-slate-900">{t.admin_division}</td>
@@ -209,7 +209,7 @@ export function TasksPage() {
                     <td className="px-2 py-2">
                       <span className="text-slate-400">{t.task_module_id}.</span> {t.task_module_name}
                       {t.on_critical_path && (
-                        <span className="ml-2 rounded bg-[#0f2a52] px-1.5 py-0.5 text-[10px] font-medium text-white">
+                        <span className="ml-2 rounded bg-gov px-1.5 py-0.5 text-[10px] font-medium text-white">
                           ścieżka krytyczna
                         </span>
                       )}

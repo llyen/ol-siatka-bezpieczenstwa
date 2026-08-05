@@ -142,7 +142,7 @@ export function RcbPage() {
             {escalations.slice(0, 5).map((e) => (
               <div key={e.id} className="rounded border border-slate-200 bg-slate-50 px-3 py-2 text-sm">
                 <div className="flex flex-wrap items-center gap-2 text-xs text-slate-500">
-                  <span className="rounded bg-[#0f2a52] px-1.5 py-0.5 font-medium text-white">{e.recommended_spo}</span>
+                  <span className="rounded bg-gov px-1.5 py-0.5 font-medium text-white">{e.recommended_spo}</span>
                   <span>{formatTimestamp(e.requested_at)}</span>
                   <span>· {e.requested_by_name}</span>
                   <span>· gotowość {e.readiness_pct}%</span>

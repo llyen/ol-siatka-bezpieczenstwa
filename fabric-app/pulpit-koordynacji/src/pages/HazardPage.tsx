@@ -129,7 +129,7 @@ export function HazardPage() {
                 key={h.hazard_code}
                 onClick={() => select({ hazardCode: h.hazard_code })}
                 className={`rounded-lg border-2 p-3 text-left transition-all ${hazardColorClass(h.color)} ${
-                  isSelected ? 'ring-4 ring-[#0f2a52] ring-offset-2' : 'opacity-90 hover:opacity-100'
+                  isSelected ? 'ring-4 ring-gov ring-offset-2' : 'opacity-90 hover:opacity-100'
                 }`}
               >
                 <div className="flex items-start justify-between gap-2">

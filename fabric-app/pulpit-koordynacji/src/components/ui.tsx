@@ -22,12 +22,12 @@ export function hazardColorClass(color: string): string {
 const STATUS_COLORS: Record<string, string> = {
   gotowe: 'bg-emerald-100 text-emerald-800 ring-emerald-600/30',
   'w toku': 'bg-amber-100 text-amber-800 ring-amber-600/30',
-  'nie rozpoczęto': 'bg-slate-100 text-slate-700 ring-slate-500/30',
+  'nie rozpoczęto': 'bg-slate-100 text-slate-700 ring-slate-300',
   zablokowane: 'bg-red-100 text-red-800 ring-red-600/30',
 };
 
 export function StatusBadge({ status }: { status: string }) {
-  const cls = STATUS_COLORS[status] ?? 'bg-slate-100 text-slate-700 ring-slate-500/30';
+  const cls = STATUS_COLORS[status] ?? 'bg-slate-100 text-slate-700 ring-slate-300';
   return (
     <span className={`inline-flex items-center rounded px-2 py-0.5 text-xs font-medium ring-1 ring-inset ${cls}`}>
       {status}
@@ -39,11 +39,11 @@ const CRITICALITY_COLORS: Record<string, string> = {
   krytyczna: 'bg-red-50 text-red-700 ring-red-600/30',
   wysoka: 'bg-orange-50 text-orange-700 ring-orange-600/30',
   średnia: 'bg-amber-50 text-amber-700 ring-amber-600/30',
-  niska: 'bg-slate-50 text-slate-600 ring-slate-500/30',
+  niska: 'bg-slate-50 text-slate-600 ring-slate-300',
 };
 
 export function CriticalityBadge({ value }: { value: string }) {
-  const cls = CRITICALITY_COLORS[value] ?? 'bg-slate-50 text-slate-600 ring-slate-500/30';
+  const cls = CRITICALITY_COLORS[value] ?? 'bg-slate-50 text-slate-600 ring-slate-300';
   return (
     <span className={`inline-flex items-center rounded px-2 py-0.5 text-xs font-medium ring-1 ring-inset ${cls}`}>
       {value}
@@ -58,7 +58,7 @@ export function RoleBadge({ role }: { role: string }) {
       className={`inline-flex items-center rounded px-2 py-0.5 text-xs font-medium ring-1 ring-inset ${
         leading
           ? 'bg-blue-100 text-blue-900 ring-blue-700/30'
-          : 'bg-slate-100 text-slate-600 ring-slate-500/30'
+          : 'bg-slate-100 text-slate-600 ring-slate-300'
       }`}
     >
       {role}
@@ -133,7 +133,7 @@ export function Button({
   variant?: 'primary' | 'secondary' | 'danger' | 'success';
 }) {
   const variants = {
-    primary: 'bg-[#0f2a52] text-white hover:bg-[#173a6d] disabled:bg-slate-300',
+    primary: 'bg-gov text-white hover:bg-gov-dark disabled:bg-slate-300',
     secondary: 'bg-white text-slate-700 ring-1 ring-inset ring-slate-300 hover:bg-slate-50 disabled:text-slate-400',
     danger: 'bg-red-600 text-white hover:bg-red-700 disabled:bg-slate-300',
     success: 'bg-emerald-600 text-white hover:bg-emerald-700 disabled:bg-slate-300',
@@ -158,7 +158,7 @@ export function BarChart({
   const tones = {
     bad: 'bg-red-600',
     warn: 'bg-amber-500',
-    normal: 'bg-[#0f2a52]',
+    normal: 'bg-gov',
   } as const;
   return (
     <div className="space-y-2">
