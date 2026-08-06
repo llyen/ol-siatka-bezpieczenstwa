@@ -14,6 +14,7 @@ Workspace: `OL-ZK-Demo-Siatka` (`5965cbe7-b1f4-4c64-b397-5c78de66d1fc`)
 | `pulpit-koordynacji` | Fabric App (AppBackend) | `2b1ed178-f1f6-4be4-a784-664e941c0e2d` | 5 ekranow, wdrozony |
 | `pulpit-koordynacji` | SQL Database | `2fd3363a-6ff5-496b-bbda-036bfc87e54a` | 2 encje write-back |
 | `OL_SIA_SemanticModel` | Semantic Model (Direct Lake) | `fdc12685-2bd8-468e-8154-409f64f391d8` | 38 miar, zweryfikowany |
+| `OL_SIA_Raport` | Raport Power BI | `b0c69b84-1623-4658-b0be-6a80bd0128ef` | 5 stron, zweryfikowany |
 | Notatniki Spark | Notebook x7 | - | lancuch przechodzi |
 
 Cluster Eventhouse: `https://trd-j90bphmup0kwg093yy.z3.kusto.fabric.microsoft.com`
