@@ -15,6 +15,7 @@ Workspace: `OL-ZK-Demo-Siatka` (`5965cbe7-b1f4-4c64-b397-5c78de66d1fc`)
 | `pulpit-koordynacji` | SQL Database | `2fd3363a-6ff5-496b-bbda-036bfc87e54a` | 2 encje write-back |
 | `OL_SIA_SemanticModel` | Semantic Model (Direct Lake) | `fdc12685-2bd8-468e-8154-409f64f391d8` | 38 miar, zweryfikowany |
 | `OL_SIA_Raport` | Raport Power BI | `b0c69b84-1623-4658-b0be-6a80bd0128ef` | 5 stron, zweryfikowany |
+| `agent_siatka_bezpieczenstwa` | Data Agent | `247ea3b8-bb8b-44b5-a6d0-d9e45bffe5ce` | 3 zrodla, zweryfikowany |
 | Notatniki Spark | Notebook x7 | - | lancuch przechodzi |
 
 Cluster Eventhouse: `https://trd-j90bphmup0kwg093yy.z3.kusto.fabric.microsoft.com`
@@ -168,7 +169,11 @@ zwraca tylko „System cancelled the Spark session", pelny traceback widac wylac
 ## 9. Co zostalo
 
 - [x] Fabric App `pulpit-koordynacji` - wdrozona, opis w `fabric-app/pulpit-koordynacji/README.md`
-- [ ] Model semantyczny i raport Power BI - odlozone
+- [x] Model semantyczny i raport Power BI - wdrozone i zweryfikowane
+- [x] Data Agent `agent_siatka_bezpieczenstwa` - `deploy/create_data_agent.py`; instrukcja
+      systemowa skladana z `ai/DATA_AGENT.md`, wiec zmiana specyfikacji wymaga ponownego
+      uruchomienia skryptu. Zrodla: Lakehouse (13 tabel), Eventhouse (10 tabel), model
+      semantyczny (16 tabel). Publikacja agenta - w interfejsie, API tego nie udostepnia.
 - [ ] Powiadomienia Activatora (e-mail / Teams) - do dokonczenia w UI
 - [ ] Powiadomienie o eskalacji z aplikacji - regula na tabeli `EscalationRequest`
 - [ ] Automatyczne odswiezanie `src/data/reference.json` (dzis recznie, `tools/export_reference.ps1`)
