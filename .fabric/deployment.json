@@ -1,0 +1,16 @@
+{
+  "workspaceName": "OL-ZK-Demo-Siatka",
+  "workspaceId": "5965cbe7-b1f4-4c64-b397-5c78de66d1fc",
+  "capacityId": "75d74dac-c3ee-4861-8a22-e7017940afbb",
+  "lakehouseName": "OL_SIA_Lakehouse",
+  "lakehouseId": "56ca1277-c81f-4a76-9413-5e3fb880dea7",
+  "sqlEndpoint": "6sgnu6v6yshurkcenu364zeety-47fwkwpuwfsezm4xlr4n4zwr7q.datawarehouse.fabric.microsoft.com",
+  "sqlEndpointId": "2336674b-1b0c-41ce-8dfd-abe79ec1b841",
+  "eventhouseId": "afdb949e-224d-4e6d-b8a3-5bf0b412fe5c",
+  "kqlDatabaseId": "a27ff4b5-c68b-4cf8-a4e2-4295a3e9b7ec",
+  "kustoQueryUri": "https://trd-j90bphmup0kwg093yy.z3.kusto.fabric.microsoft.com",
+  "realtimeDashboardId": "f55f4c59-92f2-459e-b696-6c8a3af51feb",
+  "reflexId": "7da69e87-8620-46f1-857c-5d1fd0093a03",
+  "appBackendId": "2b1ed178-f1f6-4be4-a784-664e941c0e2d",
+  "semanticModelId": "fdc12685-2bd8-468e-8154-409f64f391d8"
+}

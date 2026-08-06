@@ -13,6 +13,7 @@ Workspace: `OL-ZK-Demo-Siatka` (`5965cbe7-b1f4-4c64-b397-5c78de66d1fc`)
 | `OL_SIA_Activator` | Activator (Reflex) | `7da69e87-8620-46f1-857c-5d1fd0093a03` | 6 regul KQL |
 | `pulpit-koordynacji` | Fabric App (AppBackend) | `2b1ed178-f1f6-4be4-a784-664e941c0e2d` | 5 ekranow, wdrozony |
 | `pulpit-koordynacji` | SQL Database | `2fd3363a-6ff5-496b-bbda-036bfc87e54a` | 2 encje write-back |
+| `OL_SIA_SemanticModel` | Semantic Model (Direct Lake) | `fdc12685-2bd8-468e-8154-409f64f391d8` | 38 miar, zweryfikowany |
 | Notatniki Spark | Notebook x7 | - | lancuch przechodzi |
 
 Cluster Eventhouse: `https://trd-j90bphmup0kwg093yy.z3.kusto.fabric.microsoft.com`
